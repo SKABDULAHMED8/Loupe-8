@@ -1,32 +1,38 @@
 # 🔍 Loupe — Image Tools in Your Browser
 
 <p align="center">
-  <img src="https://chatgpt.com/library/share/libfile_9899b5f902c48191ac120357f36dff77?account_id=personal" alt="Loupe Logo" width="220">
+  <img src="https://raw.githubusercontent.com/SKABDULAHMED8/Loupe-8/main/LOUPE_logowithtext_logo3.png"
+       alt="Loupe Logo"
+       width="320">
 </p>
 
-<h3 align="center">Simple image tools. Right in your browser.</h3>
+<p align="center">
+  <strong>Simple image tools. Right in your browser.</strong>
+</p>
 
 <p align="center">
   <a href="https://loupe-8-image-resizer.edgeone.dev">
-    <img src="https://img.shields.io/badge/🌐%20OPEN%20LOUPE-1269FF?style=for-the-badge" alt="Open Loupe Website">
+    <img src="https://img.shields.io/badge/🌐%20OPEN%20LOUPE-1269FF?style=for-the-badge"
+         alt="Open Loupe Website">
   </a>
 </p>
 
 <p align="center">
   <a href="https://github.com/SKABDULAHMED8/Loupe-8">
-    <img src="https://img.shields.io/badge/GitHub-Loupe--8-black?style=for-the-badge&logo=github" alt="GitHub Repository">
+    <img src="https://img.shields.io/badge/GitHub-Loupe--8-black?style=for-the-badge&logo=github"
+         alt="GitHub Repository">
   </a>
 </p>
 
 ---
 
-## 📌 About Loupe
+# 📌 About Loupe
 
 **Loupe** is a simple browser-based image utility application created to make everyday image-processing tasks easier.
 
-You can use Loupe directly in your browser without needing a full image-editing application for basic tasks.
+Instead of installing a full image-editing application for basic operations, Loupe lets you work with images directly in your browser.
 
-Loupe helps you:
+With Loupe, you can:
 
 - 📐 Resize images
 - 📦 Compress images
@@ -45,19 +51,19 @@ Loupe helps you:
 
 # 🎯 Why Was Loupe Created?
 
-Sometimes you do not need a professional image editor.
+Many everyday image tasks do not require professional image-editing software.
 
-You may only need to:
+You may simply need to:
 
-- Reduce an image's file size
-- Change image dimensions
-- Crop an image
-- Rotate an image
+- Reduce an image's file size before uploading it
+- Change an image's dimensions
+- Crop an unwanted portion
+- Rotate an incorrectly oriented image
 - Flip an image
-- Convert an image format
+- Convert an image into another supported format
 - Prepare an image before uploading it somewhere
 
-Loupe brings these common tasks together in one simple browser application.
+Loupe brings these common operations together in one focused browser application.
 
 > **Upload → Choose → Adjust → Preview → Download**
 
@@ -83,9 +89,7 @@ Useful for:
 
 ## 📦 Compress
 
-Reduce the file size of an image.
-
-This can be useful when a website or application has an upload-size limitation.
+Reduce the file size of an image to make it easier to upload, store, or share.
 
 Loupe works toward the selected file-size target while attempting to preserve useful image quality.
 
@@ -200,7 +204,7 @@ Examples include:
 
 Visit:
 
-**[https://loupe-8-image-resizer.edgeone.dev](https://loupe-8-image-resizer.edgeone.dev)**
+👉 **[https://loupe-8-image-resizer.edgeone.dev](https://loupe-8-image-resizer.edgeone.dev)**
 
 ### 2️⃣ Upload an Image
 
@@ -234,25 +238,25 @@ Download the final image when you are satisfied with the result.
 
 ## 🏠 Loupe Home & Header
 
-![Loupe Home Header](https://github.com/SKABDULAHMED8/Loupe-8/blob/main/HEADER1.jpg?raw=true)
+![Loupe Home Header](https://raw.githubusercontent.com/SKABDULAHMED8/Loupe-8/main/HEADER1.jpg)
 
 ---
 
 ## ⚙️ Presets & Image Tools
 
-![Loupe Presets](https://github.com/SKABDULAHMED8/Loupe-8/blob/main/PRESETS2.jpg?raw=true)
+![Loupe Presets](https://raw.githubusercontent.com/SKABDULAHMED8/Loupe-8/main/PRESETS2.jpg)
 
 ---
 
 ## 💬 Support & Feedback
 
-![Loupe Support](https://github.com/SKABDULAHMED8/Loupe-8/blob/main/SUPPORT3.jpg?raw=true)
+![Loupe Support](https://raw.githubusercontent.com/SKABDULAHMED8/Loupe-8/main/SUPPORT3.jpg)
 
 ---
 
 ## 📜 Terms & Conditions
 
-![Loupe Terms and Conditions](https://github.com/SKABDULAHMED8/Loupe-8/blob/main/TANDC4.jpg?raw=true)
+![Loupe Terms and Conditions](https://raw.githubusercontent.com/SKABDULAHMED8/Loupe-8/main/TANDC4.jpg)
 
 ---
 
@@ -268,7 +272,7 @@ External services, hosting infrastructure, browsers, extensions, or third-party 
 
 ---
 
-# ⭐ Features
+# ⭐ Application Features
 
 | Feature | Purpose |
 |---|---|
@@ -340,25 +344,43 @@ Support and connection requests are handled separately.
 
 # 🎨 Loupe Branding
 
-## Loupe Logo
+## 🔍 Loupe Logo
 
 <p align="center">
-  <img src="https://chatgpt.com/library/share/libfile_9899b5f902c48191ac120357f36dff77?account_id=personal" alt="Loupe Logo" width="250">
+  <img src="https://raw.githubusercontent.com/SKABDULAHMED8/Loupe-8/main/LOUPE_logowithtext_logo3.png"
+       alt="Loupe Logo"
+       width="320">
 </p>
 
-## Loupe Icon
+---
+
+## 💠 Loupe Icon
 
 <p align="center">
-  <img src="https://chatgpt.com/library/share/libfile_c6e0a10ecbd48191afa09955fc55a07e?account_id=personal" alt="Loupe Icon" width="160">
+  <img src="https://raw.githubusercontent.com/SKABDULAHMED8/Loupe-8/main/LOUPE_Icon_logo2.png"
+       alt="Loupe Icon"
+       width="180">
 </p>
 
-## Loupe Home Header Logo
+---
+
+## 🏠 Loupe Home Header Logo
 
 <p align="center">
-  <img src="https://chatgpt.com/library/share/libfile_34d4fac24b5c81918a50c6a0ff963992?account_id=personal" alt="Loupe Home Header Logo" width="300">
+  <img src="https://raw.githubusercontent.com/SKABDULAHMED8/Loupe-8/main/LOUPE_Home_Logo1.png"
+       alt="Loupe Home Header Logo"
+       width="380">
 </p>
 
-> **Note:** The three branding links above point to ChatGPT Library resources. GitHub may not render ChatGPT Library URLs as Markdown images if those resources are not publicly accessible as direct image files. The actual website branding remains part of the project.
+---
+
+## ⚡ #AMAS_Creations Neon Branding
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/SKABDULAHMED8/Loupe-8/main/AMASH_NionBrand_Logo4.png"
+       alt="#AMAS_Creations Neon Branding"
+       width="380">
+</p>
 
 ---
 
@@ -377,6 +399,21 @@ If you only need to resize, compress, crop, rotate, flip, or convert an image, L
 ### Preview.
 
 ### Download.
+
+---
+
+# 🚀 Try Loupe
+
+<p align="center">
+  <a href="https://loupe-8-image-resizer.edgeone.dev">
+    <img src="https://img.shields.io/badge/🌐%20OPEN%20LOUPE-1269FF?style=for-the-badge"
+         alt="Open Loupe">
+  </a>
+</p>
+
+<p align="center">
+  <strong>Experience Loupe directly in your browser.</strong>
+</p>
 
 ---
 
