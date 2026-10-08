@@ -1,5 +1,12 @@
-# 🔍 Loupe — Image Tools in Your Browser
+# 🔍 Loupe — Image Tool in Your Browser
 
+## Discover Loupe
+
+![Loupe Marketing Promo](https://raw.githubusercontent.com/SKABDULAHMED8/Loupe-8/main/Loupe_Marketing_Promo_With_QR.png)
+
+### Scan to try Loupe
+
+![Loupe QR Code](https://raw.githubusercontent.com/SKABDULAHMED8/Loupe-8/main/LoupeQRCode)
 <p align="center">
   <img src="https://raw.githubusercontent.com/SKABDULAHMED8/Loupe-8/main/LOUPE_logowithtext_logo3.png"
        alt="Loupe Logo"
