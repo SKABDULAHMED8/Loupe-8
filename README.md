@@ -1,4 +1,13 @@
-# 🔍 Loupe — Image Tool in Your Browser
+# 🔍 Loupe — Image Tool in Your Browser. 
+
+
+<p align="center">
+  <a href="https://skabdulahmed8.github.io/Loupe-8/" target="_blank">
+    <img src="https://img.shields.io/badge/🚀_OPEN_LOUPE-Launch_Online-1269FF?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Open Loupe-8 Website">
+  </a>
+</p>
+
+
 
 ## Discover Loupe
 
