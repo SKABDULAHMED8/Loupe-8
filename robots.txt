@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://loupe-8-image-resizer.edgeone.dev/sitemap.xml
