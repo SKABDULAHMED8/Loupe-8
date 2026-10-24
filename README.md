@@ -1,13 +1,12 @@
 # 🔍 Loupe — Image Tool in Your Browser. 
 
-
 <p align="center">
   <a href="https://skabdulahmed8.github.io/Loupe-8/" target="_blank">
     <img src="https://img.shields.io/badge/🚀_OPEN_LOUPE-Launch_Online-1269FF?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Open Loupe-8 Website">
   </a>
 </p>
 
-
+> **License & Permission:** Loupe is proprietary software. You may view the source and use an official compiled/deployed version according to the `LICENSE`. Reuse of substantial source code, modified or rebuilt versions, redistribution, commercial integration, or derivative products requires written permission from **SK ABDUL AHMED**. See [`LICENSE`](LICENSE) and [`PERMISSIONS.md`](PERMISSIONS.md).
 
 ## Discover Loupe
 
@@ -28,7 +27,7 @@
 
 <p align="center">
   <a href="https://loupe-8-image-resizer.edgeone.dev">
-    <img src="https://img.shields.io/badge/🌐%20OPEN%20LOUPE-1269FF?style=for-the-badge"
+    <img src="https://img.shields.io/badge/🌐%20OPEN_LOUPE-1269FF?style=for-the-badge"
          alt="Open Loupe Website">
   </a>
 </p>
@@ -422,7 +421,7 @@ If you only need to resize, compress, crop, rotate, flip, or convert an image, L
 
 <p align="center">
   <a href="https://loupe-8-image-resizer.edgeone.dev">
-    <img src="https://img.shields.io/badge/🌐%20OPEN%20LOUPE-1269FF?style=for-the-badge"
+    <img src="https://img.shields.io/badge/🌐%20OPEN_LOUPE-1269FF?style=for-the-badge"
          alt="Open Loupe">
   </a>
 </p>
