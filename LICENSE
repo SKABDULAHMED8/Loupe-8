@@ -1,21 +1,49 @@
-MIT License
-
 Copyright (c) 2026 SK ABDUL AHMED
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+LOUPE-8 — PROPRIETARY SOFTWARE LICENSE
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+1. Ownership
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+Loupe-8, including its source code, software design, original user interface, original artwork, documentation, and other original materials in this repository, is owned by SK ABDUL AHMED unless a file or component states otherwise.
+
+2. Official application use
+
+You may download and use an official compiled release of Loupe-8 for personal, educational, evaluation, and other lawful use, provided that the software is obtained from an official distribution source authorized by the copyright owner.
+
+3. Source-code access
+
+The source code is publicly viewable for transparency, learning, evaluation, security review, and personal study. Public access to the source code does not transfer ownership or grant a general right to reuse, republish, modify, or redistribute the source code.
+
+4. Permission required for reuse
+
+Without prior written permission from the copyright owner, you may NOT:
+
+- copy or substantially reproduce the source code;
+- create, publish, or distribute a modified version of Loupe-8;
+- use substantial portions of the source code in another application, website, product, or service;
+- create a competing product substantially derived from Loupe-8;
+- redistribute modified or rebuilt versions of Loupe-8;
+- sell, sublicense, rent, lease, or commercially redistribute the software or substantial portions of its source code;
+- rebrand, rename, or present a modified or derivative version as your own product;
+- remove or alter copyright, license, attribution, or ownership notices;
+- use the Loupe-8 name, logo, original artwork, or branding to imply endorsement or official affiliation.
+
+5. Ideas, concepts, and implementation
+
+This license does not claim ownership of general ideas, concepts, methods, algorithms, or functionality that are not protected by copyright or another applicable intellectual-property right. However, copying or substantially reproducing Loupe-8's copyrighted source code, original artwork, documentation, or other protected expression is not permitted without authorization.
+
+If you want to build a product based on Loupe-8, reuse its source code, create a modified version, redistribute it, or use substantial portions of its implementation, contact the copyright owner and obtain written permission first.
+
+6. Third-party components
+
+This license applies only to original material owned by SK ABDUL AHMED. Third-party libraries, frameworks, fonts, icons, trademarks, and other materials remain subject to their respective licenses and terms.
+
+7. No warranty
+
+The software is provided "as is", without warranties of any kind, express or implied, to the maximum extent permitted by applicable law. The copyright owner is not liable for claims, damages, or other liability arising from use of the software, except where such limitation is not permitted by law.
+
+8. Reservation of rights
+
+All rights not expressly granted by this license are reserved by the copyright owner.
+
+Copyright (c) 2026 SK ABDUL AHMED. All rights reserved.
