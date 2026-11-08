@@ -1,0 +1,22 @@
+# --- Security: never commit secrets or signing material ---
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+keystore.properties
+local.properties
+google-services.json
+serviceAccount*.json
+secrets.*
+credentials*.json
+id_rsa*
+*.log
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
