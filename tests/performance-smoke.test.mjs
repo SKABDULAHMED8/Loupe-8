@@ -47,3 +47,10 @@ test('all executable inline JavaScript blocks parse', () => {
     new vm.Script(scripts[i][2], { filename: 'index.html:inline-script-' + (i + 1) });
   }
 });
+
+test('image elements do not contain duplicate alt attributes', () => {
+  for (const [, tag] of html.matchAll(/(<img\\b[^>]*>)/gi)) {
+    const altCount = (tag.match(/\\balt=/g) ?? []).length;
+    assert.ok(altCount <= 1, 'Duplicate alt attribute found: ' + tag);
+  }
+});
