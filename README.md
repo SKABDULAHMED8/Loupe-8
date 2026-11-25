@@ -62,6 +62,8 @@ With Loupe, you can:
 
 👉 **[Open Loupe](https://skabdulahmed8.github.io/Loupe-8/)**
 
+> **Backup website:** If GitHub Pages is unavailable or does not load, use [Loupe on EdgeOne](https://loupe-8-image-resizer.edgeone.dev).
+
 ---
 
 # 🎯 Why Was Loupe Created?
@@ -437,6 +439,10 @@ If you only need to resize, compress, crop, rotate, flip, or convert an image, L
 ### 🌐 Live Application
 
 👉 **[Open Loupe](https://skabdulahmed8.github.io/Loupe-8/)**
+
+### 🔁 Backup Application (EdgeOne)
+
+👉 **[Open Loupe Backup](https://loupe-8-image-resizer.edgeone.dev)**
 
 ### 💻 GitHub Repository
 
