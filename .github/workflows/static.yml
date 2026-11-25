@@ -30,6 +30,11 @@ jobs:
   deploy:
     if: github.event_name != 'pull_request'
     needs: validate
+    permissions:
+      actions: read
+      contents: read
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
