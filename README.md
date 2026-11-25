@@ -26,7 +26,7 @@
 </p>
 
 <p align="center">
-  <a href="https://loupe-8-image-resizer.edgeone.dev">
+  <a href="https://skabdulahmed8.github.io/Loupe-8/">
     <img src="https://img.shields.io/badge/🌐%20OPEN_LOUPE-1269FF?style=for-the-badge"
          alt="Open Loupe Website">
   </a>
@@ -60,7 +60,7 @@ With Loupe, you can:
 
 ### 🌐 Live Website
 
-👉 **[Open Loupe](https://loupe-8-image-resizer.edgeone.dev)**
+👉 **[Open Loupe](https://skabdulahmed8.github.io/Loupe-8/)**
 
 ---
 
@@ -219,7 +219,7 @@ Examples include:
 
 Visit:
 
-👉 **[https://loupe-8-image-resizer.edgeone.dev](https://loupe-8-image-resizer.edgeone.dev)**
+👉 **[https://skabdulahmed8.github.io/Loupe-8/](https://skabdulahmed8.github.io/Loupe-8/)**
 
 ### 2️⃣ Upload an Image
 
@@ -420,7 +420,7 @@ If you only need to resize, compress, crop, rotate, flip, or convert an image, L
 # 🚀 Try Loupe
 
 <p align="center">
-  <a href="https://loupe-8-image-resizer.edgeone.dev">
+  <a href="https://skabdulahmed8.github.io/Loupe-8/">
     <img src="https://img.shields.io/badge/🌐%20OPEN_LOUPE-1269FF?style=for-the-badge"
          alt="Open Loupe">
   </a>
@@ -436,7 +436,7 @@ If you only need to resize, compress, crop, rotate, flip, or convert an image, L
 
 ### 🌐 Live Application
 
-👉 **[Open Loupe](https://loupe-8-image-resizer.edgeone.dev)**
+👉 **[Open Loupe](https://skabdulahmed8.github.io/Loupe-8/)**
 
 ### 💻 GitHub Repository
 
