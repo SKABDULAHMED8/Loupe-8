@@ -84,8 +84,8 @@ def check_page(path: Path, canonical: str, *, guide: bool = False) -> str:
           str(path.relative_to(ROOT)) + " must reference the verified first-party brand image")
     check("aggregateRating" not in html,
           str(path.relative_to(ROOT)) + " must not publish browser-local review aggregates")
-    image_tags = re.findall(r"<img\\b[^>]*>", html, re.I)
-    check(all(re.search(r"\\balt\\s*=", tag, re.I) for tag in image_tags),
+    image_tags = re.findall(r"<img\b[^>]*>", html, re.I)
+    check(all(re.search(r"\balt\s*=", tag, re.I) for tag in image_tags),
           str(path.relative_to(ROOT)) + " image elements must have alt attributes")
     check_json_ld(html, str(path.relative_to(ROOT)))
     if guide:
@@ -178,9 +178,9 @@ page_titles = []
 page_descriptions = []
 for page_path in all_page_paths:
     page_source = page_path.read_text(encoding="utf-8")
-    page_titles.extend(re.findall(r"<title>([^<]+)</title>", page_source, re.I))
+        re.findall(r'<meta\s+name="description"\s+content="([^"]+)"', page_source, re.I)
     page_descriptions.extend(
-        re.findall(r'<meta\\s+name="description"\\s+content="([^"]+)"', page_source, re.I)
+        re.findall(r'<meta\s+name="description"\s+content="([^"]+)"', page_source, re.I)
     )
 check(len(page_titles) == len(set(page_titles)), "every indexable page must have a unique title")
 check(len(page_descriptions) == len(set(page_descriptions)),
