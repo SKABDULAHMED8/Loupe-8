@@ -61,6 +61,29 @@ Avoid publishing many near-identical keyword pages. Each guide must solve a dist
 - Ratings and reviews remain in the current browser and are not public testimonials.
 - Do not suggest users upload sensitive identity images to a third-party alternative.
 
+## Official SEO, AEO and GEO alignment
+
+Use primary search-engine documentation as the standard. Do not treat third-party GEO scores, keyword-density scores or AI-citation promises as ranking evidence.
+
+- Google SEO Starter Guide: https://developers.google.com/search/docs/fundamentals/seo-starter-guide
+- Google Search Essentials: https://developers.google.com/search/docs/essentials
+- Google AI features and your website: https://developers.google.com/search/docs/appearance/ai-features
+- Google generative AI optimization guide: https://developers.google.com/search/docs/fundamentals/ai-optimization-guide
+- Google crawlable link guidance: https://developers.google.com/search/docs/crawling-indexing/links-crawlable
+- Bing Webmaster Guidelines: https://www.bing.com/webmasters/help/webmaster-guidelines-30fba23a
+
+Implementation rules:
+- Keep one descriptive, accurate title, one H1, a unique meta description and one self-referencing canonical URL on each indexable page.
+- Keep the important product explanation, FAQs, limitations and guide content in crawlable HTML. Do not rely on a JavaScript-only text layer for the main explanation.
+- Use ordinary anchor elements with useful link text to connect the homepage, guide index and individual guides.
+- Keep visible page content and JSON-LD consistent. JSON-LD must be valid JSON and must not describe ratings, reviews, guarantees or features that the page cannot substantiate.
+- Prefer direct answers, practical steps, real examples, explicit limitations and links to the relevant official application instructions. Keep application requirements date-sensitive and avoid presenting one portal's limits as a universal Indian standard.
+- Do not add meta keywords, keyword-stuffed copy, near-duplicate pages, fake author credentials, fake reviews, or unverified third-party citation claims.
+- Do not add llms.txt, special AI schema, FAQPage markup, or artificial text chunking as a supposed Google AI ranking shortcut. Google says standard search eligibility and helpful content remain the basis for its AI search features; no extra special schema is required.
+- Treat Bing/Copilot eligibility and citations as dependent on crawlability, indexing, content quality and policy compliance. GEO improvements do not guarantee grounding or citation.
+
+The homepage and seven task-specific guides already form the current topic cluster. Add another indexable page only when it answers a distinct user task with original, maintainable information.
+
 ## AI search and answer-engine readiness
 - Keep important explanatory content in the delivered HTML, not only in JavaScript-generated UI.
 - Provide direct answers, task steps, limitations, tables, official source links and original product evidence.
