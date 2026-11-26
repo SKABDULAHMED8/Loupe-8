@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 HTML_PATH = ROOT / "index.html"
 SITEMAP_PATH = ROOT / "sitemap.xml"
 BASE_URL = "https://skabdulahmed8.github.io/Loupe-8/"
+SOCIAL_IMAGE = "https://raw.githubusercontent.com/SKABDULAHMED8/Loupe-8/main/LOUPE_Home_Logo1.png"
 GUIDE_PATHS = (
     "guides/passport-photo-for-online-forms/index.html",
     "guides/signature-image-for-online-forms/index.html",
@@ -25,7 +26,6 @@ EXPECTED_ASSETS = {
     "assets/loupe-lockup-light.webp": b"RIFF",
     "assets/loupe-lockup-dark.webp": b"RIFF",
     "assets/amash-brand-ribbon.webp": b"RIFF",
-    "assets/loupe-social-card.jpg": b"\xff\xd8\xff",
 }
 MAX_HTML_BYTES = 100_000
 MAX_ASSET_BYTES = 1_000_000
@@ -59,8 +59,8 @@ def check_page(path: Path, canonical: str, *, guide: bool = False) -> str:
           str(path.relative_to(ROOT)) + " must be indexable")
     check("og:image" in html and "twitter:card" in html,
           str(path.relative_to(ROOT)) + " needs social metadata")
-    check("assets/loupe-social-card.jpg" in html,
-          str(path.relative_to(ROOT)) + " must reference the branded share image")
+    check(SOCIAL_IMAGE in html,
+          str(path.relative_to(ROOT)) + " must reference the verified first-party brand image")
     check("aggregateRating" not in html,
           str(path.relative_to(ROOT)) + " must not publish browser-local review aggregates")
     if guide:
@@ -81,8 +81,8 @@ check("<h1>Resize photos and signatures for online forms</h1>" in html,
       "homepage H1 does not target application photos and signatures")
 check('name="twitter:card" content="summary_large_image"' in html,
       "homepage Twitter card must use summary_large_image")
-check('og:image:width" content="1200"' in html and 'og:image:height" content="630"' in html,
-      "homepage social image dimensions must be declared as 1200 x 630")
+check('og:image:width" content="2146"' in html and 'og:image:height" content="733"' in html,
+      "homepage social image dimensions must match the existing 2146 x 733 PNG")
 check('href="guides/' in html, "homepage must link to its guide cluster")
 check('href="#faq"' in html, "FAQ navigation must target the real FAQ anchor")
 check(len(re.findall(r'<article class="faq-item">', html)) >= 10,
@@ -94,8 +94,6 @@ check("FAQPage" not in html, "do not add retired FAQ rich-result markup")
 references = set(re.findall(
     r"""\b(?:src|href|srcset|content)=["'](assets/[^"']+)["']""", html
 ))
-if BASE_URL + "assets/loupe-social-card.jpg" in html:
-    references.add("assets/loupe-social-card.jpg")
 missing = sorted(path for path in references if not (ROOT / path).is_file())
 if missing:
     fail("referenced assets are missing: " + ", ".join(missing))
@@ -111,8 +109,6 @@ for relative, signature in EXPECTED_ASSETS.items():
     check(data.startswith(signature), "invalid file signature: " + relative)
     if path.suffix == ".webp":
         check(data[8:12] == b"WEBP", "invalid WebP file: " + relative)
-    if relative.endswith("loupe-social-card.jpg"):
-        check(path.stat().st_size <= 150_000, "social card exceeds 150 KB")
     asset_total += len(data)
 check(asset_total < MAX_ASSET_BYTES, "optimized static assets exceed 1 MB")
 
