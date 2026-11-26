@@ -10,6 +10,7 @@ import xml.etree.ElementTree as ET
 ROOT = Path(__file__).resolve().parents[1]
 HTML_PATH = ROOT / "index.html"
 SITEMAP_PATH = ROOT / "sitemap.xml"
+ROBOTS_PATH = ROOT / "robots.txt"
 README_PATH = ROOT / "README.md"
 BASE_URL = "https://skabdulahmed8.github.io/Loupe-8/"
 SOCIAL_IMAGE = "https://skabdulahmed8.github.io/Loupe-8/LOUPE_Home_Logo1.png"
@@ -73,6 +74,8 @@ def check_page(path: Path, canonical: str, *, guide: bool = False) -> str:
           str(path.relative_to(ROOT)) + " needs one useful meta description")
     check('<link rel="canonical" href="' + canonical + '">' in html,
           str(path.relative_to(ROOT)) + " canonical URL is incorrect")
+    check('<meta property="og:url" content="' + canonical + '">' in html,
+          str(path.relative_to(ROOT)) + " Open Graph URL must match the canonical URL")
     check('name="robots" content="index, follow' in html,
           str(path.relative_to(ROOT)) + " must be indexable")
     check("og:image" in html and "twitter:card" in html,
@@ -81,6 +84,9 @@ def check_page(path: Path, canonical: str, *, guide: bool = False) -> str:
           str(path.relative_to(ROOT)) + " must reference the verified first-party brand image")
     check("aggregateRating" not in html,
           str(path.relative_to(ROOT)) + " must not publish browser-local review aggregates")
+    image_tags = re.findall(r"<img\\b[^>]*>", html, re.I)
+    check(all(re.search(r"\\balt\\s*=", tag, re.I) for tag in image_tags),
+          str(path.relative_to(ROOT)) + " image elements must have alt attributes")
     check_json_ld(html, str(path.relative_to(ROOT)))
     if guide:
         words = len(re.findall(r"\b[\w'-]+\b", re.sub(r"<[^>]+>", " ", html)))
@@ -165,6 +171,20 @@ check(guide_index.is_file(), "guides/index.html is missing")
 guide_index_html = check_page(guide_index, BASE_URL + "guides/")
 check("edgeone" not in guide_index_html.casefold(), "guide index must not reference an EdgeOne backup host")
 check("CollectionPage" in guide_index_html, "guide index needs CollectionPage schema")
+
+# Search snippets and title links are page-specific: fail on accidental duplication.
+all_page_paths = [HTML_PATH, guide_index] + [ROOT / path for path in GUIDE_PATHS]
+page_titles = []
+page_descriptions = []
+for page_path in all_page_paths:
+    page_source = page_path.read_text(encoding="utf-8")
+    page_titles.extend(re.findall(r"<title>([^<]+)</title>", page_source, re.I))
+    page_descriptions.extend(
+        re.findall(r'<meta\\s+name="description"\\s+content="([^"]+)"', page_source, re.I)
+    )
+check(len(page_titles) == len(set(page_titles)), "every indexable page must have a unique title")
+check(len(page_descriptions) == len(set(page_descriptions)),
+      "every indexable page must have a unique meta description")
 for relative in GUIDE_PATHS:
     target = BASE_URL + relative.removesuffix("index.html")
     check(target in guide_index_html,
@@ -175,7 +195,9 @@ try:
 except (ET.ParseError, OSError) as exc:
     fail("sitemap.xml is missing or invalid: " + str(exc))
 ns = {"sm": "http://www.sitemaps.org/schemas/sitemap/0.9"}
-sitemap_urls = {node.text for node in sitemap_tree.findall(".//sm:loc", ns)}
+sitemap_url_nodes = [node.text for node in sitemap_tree.findall(".//sm:loc", ns)]
+sitemap_urls = set(sitemap_url_nodes)
+check(len(sitemap_url_nodes) == len(sitemap_urls), "sitemap must not contain duplicate URLs")
 check(all(url and url.startswith(BASE_URL) for url in sitemap_urls),
       "sitemap must contain only URLs under the canonical GitHub Pages project path")
 required = {BASE_URL, BASE_URL + "guides/"} | {
@@ -184,6 +206,12 @@ required = {BASE_URL, BASE_URL + "guides/"} | {
 missing_urls = sorted(required - sitemap_urls)
 if missing_urls:
     fail("sitemap is missing canonical URLs: " + ", ".join(missing_urls))
+check(sitemap_urls == required,
+      "sitemap URLs must match the exact set of published canonical pages")
+robots = ROBOTS_PATH.read_text(encoding="utf-8")
+check("Allow: /" in robots, "project robots.txt must allow crawling")
+check("Sitemap: " + BASE_URL + "sitemap.xml" in robots,
+      "project robots.txt must point to the canonical sitemap URL")
 
 print(
     "PASS: Loupe-8 SEO, guide, sitemap and asset validation "
