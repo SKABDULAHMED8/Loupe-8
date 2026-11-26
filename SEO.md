@@ -15,7 +15,8 @@ Do not add a long meta keywords tag. Use relevant phrases naturally in visible h
 ## Search appearance
 - Title: Free Image Resizer & Compressor Online | Loupe-8
 - H1: Resize photos and signatures for online forms
-- Social preview: assets/loupe-social-card.jpg (1200 x 630)
+- Current social preview: LOUPE_Home_Logo1.png (2146 x 733), served from the repository's raw GitHub URL.
+- The current image is a wide logo asset, not a dedicated 1200 x 630 preview. A purpose-built social image remains a future asset improvement.
 - Keep canonical, Open Graph URL, Twitter image, sitemap and page URL aligned.
 - Google may rewrite title links, snippets, favicons and site labels; metadata does not guarantee an exact display.
 - Google does not support a separate site name for a GitHub Pages project subdirectory. A custom domain is the longer-term brand-identity improvement.
