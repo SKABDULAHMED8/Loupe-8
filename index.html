@@ -247,18 +247,20 @@ input[type=range]{height:32px}
 // Do not watch every unhandled promise rejection: browser extensions and host integrations can
 // reject unrelated promises, which must not put the whole image editor into standby.
 let sbOn=false;
-function standby(message='Loupe could not complete the operation. Reload the page and try again. Your image stays on this device.'){
+let sbMessage='Loupe could not complete the operation. Reload the page and try again. Your image stays on this device.';
+function standby(message){
+  if(message)sbMessage=message;
   sbOn=true;
   const e=document.getElementById('standby');
   const m=document.getElementById('standby-message');
-  if(m)m.textContent=message;
+  if(m)m.textContent=sbMessage;
   if(e)e.hidden=false;
 }
 addEventListener('error',e=>{
   if(e.error)standby('A browser error interrupted Loupe. Reload the page and try again.');
 });
 addEventListener('DOMContentLoaded',()=>{
-  if(sbOn)standby();
+  if(sbOn)standby(sbMessage);
   document.getElementById('sbx').onclick=()=>document.getElementById('standby').hidden=true;
 });
 </script>
