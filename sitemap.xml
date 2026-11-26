@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://skabdulahmed8.github.io/Loupe-8/</loc>
-  </url>
+  <url><loc>https://skabdulahmed8.github.io/Loupe-8/</loc><lastmod>2026-11-26</lastmod></url>
+  <url><loc>https://skabdulahmed8.github.io/Loupe-8/guides/</loc><lastmod>2026-11-26</lastmod></url>
+  <url><loc>https://skabdulahmed8.github.io/Loupe-8/guides/passport-photo-for-online-forms/</loc><lastmod>2026-11-26</lastmod></url>
+  <url><loc>https://skabdulahmed8.github.io/Loupe-8/guides/signature-image-for-online-forms/</loc><lastmod>2026-11-26</lastmod></url>
+  <url><loc>https://skabdulahmed8.github.io/Loupe-8/guides/compress-image-to-20kb-or-50kb/</loc><lastmod>2026-11-26</lastmod></url>
+  <url><loc>https://skabdulahmed8.github.io/Loupe-8/guides/resize-image-to-exact-pixels/</loc><lastmod>2026-11-26</lastmod></url>
+  <url><loc>https://skabdulahmed8.github.io/Loupe-8/guides/profile-photo-resizer/</loc><lastmod>2026-11-26</lastmod></url>
 </urlset>
