@@ -2,6 +2,7 @@
 """Validate Loupe-8 static assets, SEO metadata, guide pages and sitemap."""
 
 from pathlib import Path
+import json
 import re
 import sys
 import xml.etree.ElementTree as ET
@@ -17,6 +18,7 @@ GUIDE_PATHS = (
     "guides/compress-image-to-20kb-or-50kb/index.html",
     "guides/resize-image-to-exact-pixels/index.html",
     "guides/profile-photo-resizer/index.html",
+    "guides/prepare-image-for-online-form/index.html",
 )
 EXPECTED_ASSETS = {
     "assets/loupe-favicon.png": b"\x89PNG\r\n\x1a\n",
@@ -77,8 +79,12 @@ def check_page(path: Path, canonical: str, *, guide: bool = False) -> str:
 html = check_page(HTML_PATH, BASE_URL)
 check(HTML_PATH.stat().st_size < MAX_HTML_BYTES, "index.html exceeds the size limit")
 check("data:image/" not in html, "keep image assets outside index.html")
-check("<h1>Resize photos and signatures for online forms</h1>" in html,
-      "homepage H1 does not target application photos and signatures")
+check("<h1>Free online image resizer for exact pixels and KB limits</h1>" in html,
+      "homepage H1 does not clearly describe exact-pixel image resizing")
+check('href="guides/prepare-image-for-online-form/"' in html,
+      "homepage must link to the online-form image preparation guide")
+check("Loupe is currently in standby mode." not in html,
+      "runtime fallback text must not appear in the initial HTML response")
 check('name="twitter:card" content="summary_large_image"' in html,
       "homepage Twitter card must use summary_large_image")
 check('og:image:width" content="2146"' in html and 'og:image:height" content="733"' in html,
@@ -120,6 +126,20 @@ guide_index = ROOT / "guides/index.html"
 check(guide_index.is_file(), "guides/index.html is missing")
 guide_index_html = check_page(guide_index, BASE_URL + "guides/")
 check("CollectionPage" in guide_index_html, "guide index needs CollectionPage schema")
+
+all_pages = [HTML_PATH, guide_index] + [ROOT / path for path in GUIDE_PATHS]
+for page in all_pages:
+    page_html = page.read_text(encoding="utf-8")
+    blocks = re.findall(
+        r'<script\\s+type="application/ld\\+json">\\s*(.*?)\\s*</script>',
+        page_html, re.I | re.S
+    )
+    check(bool(blocks), str(page.relative_to(ROOT)) + " needs JSON-LD structured data")
+    for block in blocks:
+        try:
+            json.loads(block)
+        except json.JSONDecodeError as exc:
+            fail(str(page.relative_to(ROOT)) + " has invalid JSON-LD: " + str(exc))
 
 try:
     sitemap_tree = ET.parse(SITEMAP_PATH)
