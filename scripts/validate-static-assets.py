@@ -144,6 +144,7 @@ for relative in GUIDE_PATHS:
 guide_index = ROOT / "guides/index.html"
 check(guide_index.is_file(), "guides/index.html is missing")
 guide_index_html = check_page(guide_index, BASE_URL + "guides/")
+check("edgeone" not in guide_index_html.casefold(), "guide index must not reference an EdgeOne backup host")
 check("CollectionPage" in guide_index_html, "guide index needs CollectionPage schema")
 for relative in GUIDE_PATHS:
     target = BASE_URL + relative.removesuffix("index.html")
