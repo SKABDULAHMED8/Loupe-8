@@ -108,6 +108,10 @@ footer{max-width:1080px;margin:0 auto;padding:24px 20px 40px;border-top:1px soli
 input[type=range]{padding:0;accent-color:var(--accent)}
 .legal{display:grid;gap:10px;margin-bottom:22px}
 details{border:1px solid var(--line);border-radius:12px;background:var(--card);padding:0 16px}
+.faq-list{display:grid;gap:14px;max-width:75ch}
+.faq-item{padding:12px 0;border-bottom:1px solid var(--line)}
+.faq-item h3{margin:0 0 6px}
+.faq-item p{margin:0;color:var(--muted)}
 summary{cursor:pointer;font-weight:700;color:var(--ink);padding:14px 0}
 details p,details li{max-width:75ch;margin:0 0 12px}
 details ul{margin:0;padding-left:20px}
@@ -308,34 +312,34 @@ addEventListener('DOMContentLoaded',()=>{if(sbOn)standby();document.getElementBy
   <div id="presets"></div>
   <p id="none" class="hint" hidden>No preset matches that search. Try a size like 100 KB or a format like PNG.</p>
 </section>
-<section id="faqs" aria-labelledby="faqs-title">
-  <h2 id="faqs-title">How do I resize and compress images with Loupe?</h2>
+<section id="faq" aria-labelledby="faq-title">
+  <h2 id="faq-title">Frequently asked questions about Loupe</h2>
   <p class="lead">Answers about image formats, file-size limits, dimensions and privacy.</p>
-  <div class="legal">
-    <details>
-      <summary>Can I compress an image to an exact KB size?</summary>
+  <div class="faq-list">
+    <article class="faq-item">
+      <h3>Can I compress an image to an exact KB size?</h3>
       <p>Set a maximum size in KB. Loupe searches for the highest JPG or WebP quality that stays at or below that limit. If quality reduction is not enough, it also reduces the pixel dimensions. The final file can be smaller than the limit; the maximum-size setting is not a promise of an exact file size.</p>
-    </details>
-    <details>
-      <summary>Can I resize an image to exact pixel dimensions?</summary>
+    </article>
+    <article class="faq-item">
+      <h3>Can I resize an image to exact pixel dimensions?</h3>
       <p>Yes. Enter the target width and height in pixels. With Keep proportions enabled, Loupe adjusts the other dimension to preserve the image shape. With it disabled, Loupe crops to the requested dimensions instead of stretching the image.</p>
-    </details>
-    <details>
-      <summary>Which image formats does Loupe support?</summary>
+    </article>
+    <article class="faq-item">
+      <h3>Which image formats does Loupe support?</h3>
       <p>Loupe accepts JPG, PNG, WebP and GIF images. You can export as JPG, PNG or WebP. An animated GIF is processed as a single still image.</p>
-    </details>
-    <details>
-      <summary>Are my images uploaded to a server?</summary>
+    </article>
+    <article class="faq-item">
+      <h3>Are my images uploaded to a server?</h3>
       <p>Loupe processes the selected image in your browser. The image itself is not uploaded to Loupe's servers. The page does load Google Fonts, and the hosting provider may keep standard server logs; see the Privacy Policy for those details.</p>
-    </details>
-    <details>
-      <summary>Can I prepare a passport-size or application photo?</summary>
+    </article>
+    <article class="faq-item">
+      <h3>Can I prepare a passport-size or application photo?</h3>
       <p>Loupe includes a 35:45 passport crop ratio and searchable photo and signature presets for common application workflows. Presets are unofficial and may not match a current form. Check the latest official notification or portal instructions before submitting a file.</p>
-    </details>
-    <details>
-      <summary>Can I change the DPI of an image?</summary>
+    </article>
+    <article class="faq-item">
+      <h3>Can I change the DPI of an image?</h3>
       <p>Loupe can write the selected DPI value into JPG files. DPI metadata is not written to PNG or WebP exports.</p>
-    </details>
+    </article>
   </div>
   <ul class="points">
     <li>Input: JPG, PNG, WebP and GIF</li>
