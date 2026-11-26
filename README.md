@@ -1,4 +1,4 @@
-# 🔍 Loupe — Image Tool in Your Browser. 
+# Loupe-8: Free Online Image Resizer, Compressor & Converter
 
 <p align="center">
   <a href="https://skabdulahmed8.github.io/Loupe-8/" target="_blank">
@@ -7,6 +7,18 @@
 </p>
 
 > **License & Permission:** Loupe is proprietary software. You may view the source and use an official compiled/deployed version according to the `LICENSE`. Reuse of substantial source code, modified or rebuilt versions, redistribution, commercial integration, or derivative products requires written permission from **SK ABDUL AHMED**. See [`LICENSE`](LICENSE) and [`PERMISSIONS.md`](PERMISSIONS.md).
+
+## What Loupe-8 does
+
+Loupe-8 is a free online image resizer for changing image width and height in pixels, cropping to a target frame, compressing JPG or WebP files to a maximum KB limit, and converting JPG, PNG and WebP images. It can help prepare an existing photo, scanned signature or profile picture for an online form.
+
+The image editor runs in the browser. Selected images are processed locally and are not uploaded to a Loupe image-processing server. No account or signup is required. The editor accepts JPG, PNG, WebP and GIF input; animated GIFs become a still image.
+
+Use **Resize** when a form requires pixel dimensions. Use **Compress** when a maximum file-size limit is the main requirement and the dimensions are allowed to change. A maximum KB value is a ceiling, not an exact output-size promise. Always check the form's current official instructions before submitting a file.
+
+- [Open the free Loupe-8 image resizer](https://skabdulahmed8.github.io/Loupe-8/)
+- [How to resize an image for an online form](https://skabdulahmed8.github.io/Loupe-8/guides/prepare-image-for-online-form/)
+- [All image resizing guides](https://skabdulahmed8.github.io/Loupe-8/guides/)
 
 ## Discover Loupe
 

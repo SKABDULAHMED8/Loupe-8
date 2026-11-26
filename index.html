@@ -3,16 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Free Image Resizer &amp; Compressor Online | Loupe-8</title>
-<meta name="description" content="Resize photos and scanned signatures for online forms. Set pixel dimensions, crop to 35:45, and compress JPG or WebP images to a maximum KB limit. Free, no signup.">
+<title>Free Online Image Resizer: Exact Pixels &amp; KB Limits | Loupe-8</title>
+<meta name="description" content="Resize images online by pixel width and height, crop to an exact frame, or compress JPG and WebP to a KB limit. Prepare photos and signatures for forms. Free, no signup.">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="author" content="#AMAS_Creations">
 <meta name="application-name" content="Loupe-8">
 <link rel="canonical" href="https://skabdulahmed8.github.io/Loupe-8/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Loupe-8">
-<meta property="og:title" content="Free Image Resizer &amp; Compressor Online | Loupe-8">
-<meta property="og:description" content="Resize photos and scanned signatures for online forms. Set pixel dimensions, crop to 35:45, and compress JPG or WebP images to a maximum KB limit. Free, no signup.">
+<meta property="og:title" content="Free Online Image Resizer: Exact Pixels &amp; KB Limits | Loupe-8">
+<meta property="og:description" content="Resize images online by pixel width and height, crop to an exact frame, or compress JPG and WebP to a KB limit. Prepare photos and signatures for forms. Free, no signup.">
 <meta property="og:url" content="https://skabdulahmed8.github.io/Loupe-8/">
 <meta property="og:image" content="https://skabdulahmed8.github.io/Loupe-8/LOUPE_Home_Logo1.png">
 <meta property="og:image:secure_url" content="https://skabdulahmed8.github.io/Loupe-8/LOUPE_Home_Logo1.png">
@@ -21,8 +21,8 @@
 <meta property="og:image:height" content="733">
 <meta property="og:image:alt" content="Loupe-8 image resizer, compressor and converter for online forms">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Free Image Resizer &amp; Compressor Online | Loupe-8">
-<meta name="twitter:description" content="Resize photos and scanned signatures for online forms. Set pixel dimensions, crop to 35:45, and compress JPG or WebP images to a maximum KB limit. Free, no signup.">
+<meta name="twitter:title" content="Free Online Image Resizer: Exact Pixels &amp; KB Limits | Loupe-8">
+<meta name="twitter:description" content="Resize images online by pixel width and height, crop to an exact frame, or compress JPG and WebP to a KB limit. Prepare photos and signatures for forms. Free, no signup.">
 <meta name="twitter:image" content="https://skabdulahmed8.github.io/Loupe-8/LOUPE_Home_Logo1.png">
 <script type="application/ld+json">
 {
@@ -40,7 +40,7 @@
       "url":"https://skabdulahmed8.github.io/Loupe-8/",
       "name":"Loupe-8",
       "alternateName":"Loupe 8",
-      "description":"A free browser-based image resizer, compressor and converter for photos and online forms.",
+      "description":"A free online image resizer, compressor and converter for exact pixel dimensions, KB-limited image files and online form photos.",
       "inLanguage":"en-IN",
       "publisher":{"@id":"https://skabdulahmed8.github.io/Loupe-8/#organization"}
     },
@@ -49,7 +49,7 @@
       "@id":"https://skabdulahmed8.github.io/Loupe-8/#application",
       "name":"Loupe-8",
       "url":"https://skabdulahmed8.github.io/Loupe-8/",
-      "description":"Resize photos and scanned signatures by pixel dimensions, crop images, compress JPG or WebP files to a maximum KB limit, and convert image formats in your browser.",
+      "description":"Resize JPG, PNG, WebP and GIF images by pixel dimensions, crop to a target frame, compress JPG or WebP to a maximum KB limit, convert formats, rotate and flip images in your browser.",
       "applicationCategory":"MultimediaApplication",
       "applicationSubCategory":"Image editor",
       "operatingSystem":"Any",
@@ -58,9 +58,9 @@
       "isAccessibleForFree":true,
       "offers":{"@type":"Offer","price":"0","priceCurrency":"INR"},
       "featureList":[
-        "Resize images by pixel width and height",
+        "Resize JPG, PNG, WebP and GIF images by pixel width and height",
         "Crop images to supported aspect ratios including 35:45 and 1:1",
-        "Compress JPG and WebP images to a maximum KB limit",
+        "Compress JPG and WebP images to a maximum KB limit, reducing pixel dimensions when needed",
         "Convert images to JPG, PNG and WebP",
         "Rotate and flip images",
         "Write DPI metadata to JPG files"
@@ -233,12 +233,38 @@ input[type=range]{height:32px}
 
 </style>
 <script>
-// Standby message: shown if the page crashes or a tool cannot finish the job
-let sbOn=false;
-function standby(){sbOn=true;const e=document.getElementById('standby');if(e)e.hidden=false}
+// Show the recovery notice only after a real runtime failure.
+function standby(){
+  const show=()=>{
+    if(!document.body || document.getElementById('standby')) return;
+    const box=document.createElement('div');
+    box.className='standby';
+    box.id='standby';
+    box.setAttribute('role','alert');
+    const content=document.createElement('div');
+    const title=document.createElement('p');
+    title.textContent='Loupe could not complete an image operation. Reload the page or try a smaller or different image.';
+    const note=document.createElement('p');
+    note.className='warn';
+    note.textContent='The optional alternative below is a separate third-party website. It is not operated by Loupe. Review its privacy policy before uploading an image.';
+    const link=document.createElement('a');
+    link.href='https://image.pi7.org/';
+    link.target='_blank';
+    link.rel='noopener noreferrer';
+    link.textContent='Open image.pi7.org (third-party site)';
+    const close=document.createElement('button');
+    close.type='button';
+    close.textContent='Close';
+    close.addEventListener('click',()=>box.remove());
+    content.append(title,note,link);
+    box.append(content,close);
+    document.body.prepend(box);
+  };
+  if(document.body) show();
+  else addEventListener('DOMContentLoaded',show,{once:true});
+}
 addEventListener('error',e=>{if(e.error)standby()});
 addEventListener('unhandledrejection',standby);
-addEventListener('DOMContentLoaded',()=>{if(sbOn)standby();document.getElementById('sbx').onclick=()=>document.getElementById('standby').hidden=true});
 </script>
 
 <link rel="icon" type="image/png" href="assets/loupe-favicon.png">
@@ -246,15 +272,8 @@ addEventListener('DOMContentLoaded',()=>{if(sbOn)standby();document.getElementBy
 </head>
 <body>
 <div class="asset-protection-layer" aria-hidden="true"></div>
-<noscript><p class="standby" style="position:static;display:block"><b>Loupe needs JavaScript to process images.</b> You can use a temporary third-party alternative, image.pi7.org, which is a separate website. Files uploaded there are handled according to that website's own policies. Please review them before uploading. <a href="https://image.pi7.org/" target="_blank" rel="noopener noreferrer">Open image.pi7.org</a></p></noscript>
-<div class="standby" id="standby" role="alert" hidden>
-  <div>
-    <p><b>Loupe is currently in standby mode.</b> You can continue with image processing using a temporary third-party alternative, image.pi7.org. Please review that service's privacy policy before uploading images.</p>
-    <p class="warn"><b>Important:</b> image.pi7.org is a separate third-party website. Files uploaded there are handled according to that website's own policies. It is not run by Loupe or #AMAS_Creations, and Loupe's privacy statements do not apply to it.</p>
-    <p><a href="https://image.pi7.org/" target="_blank" rel="noopener noreferrer">Open image.pi7.org (third-party site, opens in a new tab)</a></p>
-  </div>
-  <button type="button" id="sbx">Close</button>
-</div>
+<noscript><p class="note" style="position:static;display:block"><b>Loupe needs JavaScript and Canvas support to resize or convert images.</b> Enable JavaScript in your browser to use the image editor. The written image guides remain available without JavaScript.</p></noscript>
+
 <header class="bar">
   <a class="logo" href="#" aria-label="Loupe home"><picture class="header-logo-picture"><source media="(prefers-color-scheme: dark)" srcset="assets/loupe-wordmark-dark.webp"><img class="header-logo-img" width="2083" height="624" src="assets/loupe-wordmark-light.webp" alt="Loupe — Make Any Image The Exact Size You Need"></picture></a>
   <nav><a href="#tools">Presets</a><a href="#guides">Guides</a><a href="#faq">FAQs</a><a href="#support">Support</a><a href="#privacy">Privacy</a><a href="#terms">Terms</a></nav>
@@ -264,8 +283,8 @@ addEventListener('DOMContentLoaded',()=>{if(sbOn)standby();document.getElementBy
   <div class="brand-lockup">
     <picture class="brand-logo-picture"><source media="(prefers-color-scheme: dark)" srcset="assets/loupe-lockup-dark.webp"><img width="1100" height="865" src="assets/loupe-lockup-light.webp" alt="Loupe infinity magnifier logo — Make Any Image The Exact Size You Need"></picture>
   </div>
-  <h1>Resize photos and signatures for online forms</h1>
-  <p class="lead">Loupe-8 is a free, browser-based image resizer and compressor for online forms. Resize an existing passport-style photo, scanned signature or profile picture by pixels; crop it; and convert or compress JPG and WebP files to a maximum KB limit. Your selected image is processed locally in your browser. No account or signup is required.</p>
+  <h1>Free online image resizer for exact pixels and KB limits</h1>
+  <p class="lead">Loupe-8 is a free online image resizer, compressor and converter. Set image width and height in pixels, preserve proportions or crop to a target frame, reduce JPG or WebP files to a maximum KB limit, and prepare photos or scanned signatures for online forms. Selected images are processed in your browser; no account or signup is required.</p>
   <p class="note form-note">Photo and signature requirements vary by application. Check the current official notice for the exact dimensions, file-size range, format, background and DPI before submitting a file. Loupe-8 is an independent utility, not a government service or an affiliated recruitment portal.</p>
 
   <ul class="points"><li>Processed in your browser</li><li>Pixel size, KB limits and DPI</li><li>Free, no sign-up</li></ul>
@@ -342,6 +361,7 @@ addEventListener('DOMContentLoaded',()=>{if(sbOn)standby();document.getElementBy
   <h2 id="guides-title">Guides for common image-upload tasks</h2>
   <p class="manual-intro">Follow practical steps for photo crops, scanned signatures, image-size limits and profile pictures. Always use the current instructions from the portal where you will submit the file.</p>
   <div class="manual-grid">
+    <article class="manual-step"><h3><a href="guides/prepare-image-for-online-form/">Resize an image for an online form</a></h3><p>Choose between exact pixel resizing and KB-limited compression. Learn how to satisfy a form specification without confusing pixels, crop ratio, file size and DPI.</p></article>
     <article class="manual-step"><h3><a href="guides/passport-photo-for-online-forms/">Passport-style photo</a></h3><p>Crop an existing photo, use the 35:45 ratio where suitable, and check the portal's actual requirements.</p></article>
     <article class="manual-step"><h3><a href="guides/signature-image-for-online-forms/">Scanned signature</a></h3><p>Resize an existing signature image and check its dimensions, format and file-size range.</p></article>
     <article class="manual-step"><h3><a href="guides/compress-image-to-20kb-or-50kb/">Compress to 20 KB or 50 KB</a></h3><p>Understand maximum and minimum file-size settings and why a maximum is not an exact output size.</p></article>
