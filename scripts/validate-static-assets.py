@@ -78,6 +78,8 @@ def check_page(path: Path, canonical: str, *, guide: bool = False) -> str:
 
 
 html = check_page(HTML_PATH, BASE_URL)
+check("image.pi7.org" not in html.casefold(), "homepage must not direct visitors to an unrelated third-party image service")
+check("unhandledrejection" not in html, "do not show the site-wide standby notice for unrelated rejected promises")
 readme = README_PATH.read_text(encoding="utf-8")
 check("edgeone" not in readme.casefold(), "README must not advertise an EdgeOne backup host")
 check("edgeone" not in html.casefold(), "homepage must not reference an EdgeOne backup host")
