@@ -101,7 +101,7 @@ def check_page(path: Path, canonical: str, *, guide: bool = False) -> str:
 
 
 html = check_page(HTML_PATH, BASE_URL)
-check('<link rel="icon" type="image/png" sizes="96x96" href="' + BASE_URL + 'assets/loupe-favicon-search.png">'.replace(BASE_URL, BASE_URL) in html,
+check('<link rel="icon" type="image/png" sizes="96x96" href="' + BASE_URL + 'assets/loupe-favicon-search.png">' in html,
       "homepage must expose the crawlable 96 x 96 Loupe search favicon")
 check("image.pi7.org" not in html.casefold(), "homepage must not direct visitors to an unrelated third-party image service")
 check("unhandledrejection" not in html, "do not show the site-wide standby notice for unrelated rejected promises")
