@@ -2,7 +2,7 @@
 
 **Loupe-8 is a free online image resizer for exact pixel dimensions, photo crops, JPG/WebP compression to a maximum KB limit, and JPG, PNG or WebP conversion.** It runs image processing in your browser and does not upload selected images to a Loupe image-processing server. No account or signup is required.
 
-Use it to prepare profile pictures, scanned signatures and images for online forms. Always follow the current requirements of the form where you will submit the image; Loupe-8 does not certify or guarantee portal acceptance.
+Use it to prepare profile pictures, scanned signatures and images for online forms, including government recruitment applications. The guide covers photo and signature preparation for SSC, UPSC, IBPS, RRB and state recruitment workflows. Requirements vary by current notice; Loupe-8 prepares image files only and does not fill or submit applications, certify files or guarantee portal acceptance.
 
 <p align="center">
   <a href="https://skabdulahmed8.github.io/Loupe-8/" target="_blank">
