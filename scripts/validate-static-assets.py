@@ -1,12 +1,22 @@
 #!/usr/bin/env python3
-"""Validate local image assets before deploying the static Loupe-8 site."""
+"""Validate Loupe-8 static assets, SEO metadata, guide pages and sitemap."""
 
 from pathlib import Path
 import re
 import sys
+import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
 HTML_PATH = ROOT / "index.html"
+SITEMAP_PATH = ROOT / "sitemap.xml"
+BASE_URL = "https://skabdulahmed8.github.io/Loupe-8/"
+GUIDE_PATHS = (
+    "guides/passport-photo-for-online-forms/index.html",
+    "guides/signature-image-for-online-forms/index.html",
+    "guides/compress-image-to-20kb-or-50kb/index.html",
+    "guides/resize-image-to-exact-pixels/index.html",
+    "guides/profile-photo-resizer/index.html",
+)
 EXPECTED_ASSETS = {
     "assets/loupe-favicon.png": b"\x89PNG\r\n\x1a\n",
     "assets/loupe-icon.webp": b"RIFF",
@@ -15,56 +25,121 @@ EXPECTED_ASSETS = {
     "assets/loupe-lockup-light.webp": b"RIFF",
     "assets/loupe-lockup-dark.webp": b"RIFF",
     "assets/amash-brand-ribbon.webp": b"RIFF",
+    "assets/loupe-social-card.jpg": b"\xff\xd8\xff",
 }
 MAX_HTML_BYTES = 100_000
 MAX_ASSET_BYTES = 1_000_000
+MIN_GUIDE_WORDS = 250
 
 
 def fail(message: str) -> None:
-    print(f"ERROR: {message}", file=sys.stderr)
+    print("ERROR: " + message, file=sys.stderr)
     raise SystemExit(1)
 
 
-if not HTML_PATH.is_file():
-    fail("index.html is missing")
+def check(condition: bool, message: str) -> None:
+    if not condition:
+        fail(message)
 
-html_bytes = HTML_PATH.stat().st_size
-html = HTML_PATH.read_text(encoding="utf-8")
-if html_bytes >= MAX_HTML_BYTES:
-    fail(f"index.html exceeds {MAX_HTML_BYTES:,} bytes ({html_bytes:,})")
-if "data:image/" in html:
-    fail("index.html contains embedded image data; keep large images as external assets")
 
-references = set(
-    re.findall(r"\b(?:src|href|srcset)=[\"'](assets/[^\"']+)[\"']", html)
-)
-missing_references = sorted(references - {
-    path for path in EXPECTED_ASSETS if (ROOT / path).is_file()
-})
-if missing_references:
-    fail("referenced asset files are missing: " + ", ".join(missing_references))
+def check_page(path: Path, canonical: str, *, guide: bool = False) -> str:
+    check(path.is_file(), "required page is missing: " + str(path.relative_to(ROOT)))
+    html = path.read_text(encoding="utf-8")
+    check(path.stat().st_size < MAX_HTML_BYTES, path.name + " is too large")
+    check(len(re.findall(r"<h1\\b", html, re.I)) == 1,
+          str(path.relative_to(ROOT)) + " must contain exactly one H1")
+    check(len(re.findall(r"<title>[^<]+</title>", html, re.I)) == 1,
+          str(path.relative_to(ROOT)) + " must contain exactly one title")
+    descriptions = re.findall(r'<meta\\s+name="description"\\s+content="([^"]+)"', html, re.I)
+    check(len(descriptions) == 1 and len(descriptions[0]) >= 90,
+          str(path.relative_to(ROOT)) + " needs one useful meta description")
+    check('<link rel="canonical" href="' + canonical + '">' in html,
+          str(path.relative_to(ROOT)) + " canonical URL is incorrect")
+    check('name="robots" content="index, follow' in html,
+          str(path.relative_to(ROOT)) + " must be indexable")
+    check("og:image" in html and "twitter:card" in html,
+          str(path.relative_to(ROOT)) + " needs social metadata")
+    check("assets/loupe-social-card.jpg" in html,
+          str(path.relative_to(ROOT)) + " must reference the branded share image")
+    check("aggregateRating" not in html,
+          str(path.relative_to(ROOT)) + " must not publish browser-local review aggregates")
+    if guide:
+        words = len(re.findall(r"\\b[\\w'-]+\\b", re.sub(r"<[^>]+>", " ", html)))
+        check(words >= MIN_GUIDE_WORDS,
+              str(path.relative_to(ROOT)) + " has too little visible content")
+        check('href="' + BASE_URL + '#app"' in html,
+              str(path.relative_to(ROOT)) + " must link back to the editor")
+        check('"@type":"Article"' in html or '"@type": "Article"' in html,
+              str(path.relative_to(ROOT)) + " needs Article schema")
+    return html
 
+
+html = check_page(HTML_PATH, BASE_URL)
+check(HTML_PATH.stat().st_size < MAX_HTML_BYTES, "index.html exceeds the size limit")
+check("data:image/" not in html, "keep image assets outside index.html")
+check("<h1>Resize photos and signatures for online forms</h1>" in html,
+      "homepage H1 does not target application photos and signatures")
+check('name="twitter:card" content="summary_large_image"' in html,
+      "homepage Twitter card must use summary_large_image")
+check('og:image:width" content="1200"' in html and 'og:image:height" content="630"' in html,
+      "homepage social image dimensions must be declared as 1200 x 630")
+check('href="guides/' in html, "homepage must link to its guide cluster")
+check('href="#faq"' in html, "FAQ navigation must target the real FAQ anchor")
+check(len(re.findall(r'<article class="faq-item">', html)) >= 10,
+      "homepage needs at least ten visible FAQ answers")
+check('"@type":"WebApplication"' in html and '"applicationCategory":"MultimediaApplication"' in html,
+      "WebApplication schema is missing")
+check("FAQPage" not in html, "do not add retired FAQ rich-result markup")
+
+references = set(re.findall(
+    r"""\\b(?:src|href|srcset|content)=["'](assets/[^"']+)["']""", html
+))
+missing = sorted(path for path in references if not (ROOT / path).is_file())
+if missing:
+    fail("referenced assets are missing: " + ", ".join(missing))
 unreferenced = sorted(set(EXPECTED_ASSETS) - references)
 if unreferenced:
-    fail("expected optimized assets are not referenced: " + ", ".join(unreferenced))
+    fail("expected assets are not referenced: " + ", ".join(unreferenced))
 
 asset_total = 0
-for relative_path, signature in EXPECTED_ASSETS.items():
-    path = ROOT / relative_path
-    if not path.is_file():
-        fail(f"required asset is missing: {relative_path}")
+for relative, signature in EXPECTED_ASSETS.items():
+    path = ROOT / relative
+    check(path.is_file(), "required asset is missing: " + relative)
     data = path.read_bytes()
-    if not data.startswith(signature):
-        fail(f"invalid file signature: {relative_path}")
-    if path.suffix == ".webp" and data[8:12] != b"WEBP":
-        fail(f"invalid WebP container: {relative_path}")
+    check(data.startswith(signature), "invalid file signature: " + relative)
+    if path.suffix == ".webp":
+        check(data[8:12] == b"WEBP", "invalid WebP file: " + relative)
+    if relative.endswith("loupe-social-card.jpg"):
+        check(path.stat().st_size <= 150_000, "social card exceeds 150 KB")
     asset_total += len(data)
+check(asset_total < MAX_ASSET_BYTES, "optimized static assets exceed 1 MB")
 
-if asset_total >= MAX_ASSET_BYTES:
-    fail(f"optimized asset set exceeds {MAX_ASSET_BYTES:,} bytes ({asset_total:,})")
+for relative in GUIDE_PATHS:
+    canonical = BASE_URL + relative.removesuffix("index.html")
+    check_page(ROOT / relative, canonical, guide=True)
+
+guide_index = ROOT / "guides/index.html"
+check(guide_index.is_file(), "guides/index.html is missing")
+guide_index_html = check_page(guide_index, BASE_URL + "guides/")
+check("CollectionPage" in guide_index_html, "guide index needs CollectionPage schema")
+
+try:
+    sitemap_tree = ET.parse(SITEMAP_PATH)
+except (ET.ParseError, OSError) as exc:
+    fail("sitemap.xml is missing or invalid: " + str(exc))
+ns = {"sm": "http://www.sitemaps.org/schemas/sitemap/0.9"}
+sitemap_urls = {node.text for node in sitemap_tree.findall(".//sm:loc", ns)}
+required = {BASE_URL, BASE_URL + "guides/"} | {
+    BASE_URL + path.removesuffix("index.html") for path in GUIDE_PATHS
+}
+missing_urls = sorted(required - sitemap_urls)
+if missing_urls:
+    fail("sitemap is missing canonical URLs: " + ", ".join(missing_urls))
 
 print(
-    "PASS: static asset checks passed "
-    f"(HTML {html_bytes:,} bytes; assets {asset_total:,} bytes; "
-    f"{len(references)} local references)."
+    "PASS: Loupe-8 SEO, guide, sitemap and asset validation "
+    + "(homepage " + str(HTML_PATH.stat().st_size) + " bytes; "
+    + str(len(GUIDE_PATHS)) + " article guides; "
+    + str(len(sitemap_urls)) + " sitemap URLs; "
+    + str(asset_total) + " asset bytes)."
 )
