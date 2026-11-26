@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Loupe-8 – Image Resizer, Compressor &amp; Converter Online</title>
-<meta name="description" content="Use Loupe-8 to resize, compress, crop, rotate, flip and convert images online. Adjust image dimensions and file sizes with browser-based image processing.">
+<meta name="description" content="Resize and compress images online with Loupe-8. Set pixel dimensions or KB limits, crop, convert and rotate images locally in your browser.">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="author" content="#AMAS_Creations">
 <meta name="application-name" content="Loupe-8">
@@ -12,12 +12,12 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Loupe-8">
 <meta property="og:title" content="Loupe-8 – Image Resizer, Compressor &amp; Converter Online">
-<meta property="og:description" content="Resize, compress, crop, rotate and convert images online with Loupe-8. Adjust dimensions and file sizes using browser-based image processing.">
+<meta property="og:description" content="Resize and compress images online with Loupe-8. Set pixel dimensions or KB limits, crop, convert and rotate images locally in your browser.">
 <meta property="og:url" content="https://skabdulahmed8.github.io/Loupe-8/">
 <meta property="og:image" content="https://raw.githubusercontent.com/SKABDULAHMED8/Loupe-8/main/LOUPE_Home_Logo1.png">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Loupe-8 – Image Resizer &amp; Compressor Online">
-<meta name="twitter:description" content="Resize, compress, crop and convert images in your browser with Loupe-8.">
+<meta name="twitter:description" content="Resize and compress images online. Set pixel dimensions or KB limits, crop, convert and rotate images locally with Loupe-8.">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/SKABDULAHMED8/Loupe-8/main/LOUPE_Home_Logo1.png">
 <script type="application/ld+json">
 {
@@ -229,7 +229,7 @@ addEventListener('DOMContentLoaded',()=>{if(sbOn)standby();document.getElementBy
 </div>
 <header class="bar">
   <a class="logo" href="#" aria-label="Loupe home"><picture class="header-logo-picture"><source media="(prefers-color-scheme: dark)" srcset="assets/loupe-wordmark-dark.webp"><img class="header-logo-img" src="assets/loupe-wordmark-light.webp" alt="Loupe — Make Any Image The Exact Size You Need"></picture></a>
-  <nav><a href="#tools">Presets</a><a href="#support">Support</a><a href="#privacy">Privacy</a><a href="#terms">Terms</a></nav>
+  <nav><a href="#tools">Presets</a><a href="#faqs">FAQs</a><a href="#support">Support</a><a href="#privacy">Privacy</a><a href="#terms">Terms</a></nav>
 </header>
 <main>
 <section>
@@ -307,6 +307,42 @@ addEventListener('DOMContentLoaded',()=>{if(sbOn)standby();document.getElementBy
   <input id="q" type="search" aria-label="Search presets" placeholder="Search presets, such as 50 KB or passport">
   <div id="presets"></div>
   <p id="none" class="hint" hidden>No preset matches that search. Try a size like 100 KB or a format like PNG.</p>
+</section>
+<section id="faqs" aria-labelledby="faqs-title">
+  <h2 id="faqs-title">How do I resize and compress images with Loupe?</h2>
+  <p class="lead">Answers about image formats, file-size limits, dimensions and privacy.</p>
+  <div class="legal">
+    <details>
+      <summary>Can I compress an image to an exact KB size?</summary>
+      <p>Set a maximum size in KB. Loupe searches for the highest JPG or WebP quality that stays at or below that limit. If quality reduction is not enough, it also reduces the pixel dimensions. The final file can be smaller than the limit; the maximum-size setting is not a promise of an exact file size.</p>
+    </details>
+    <details>
+      <summary>Can I resize an image to exact pixel dimensions?</summary>
+      <p>Yes. Enter the target width and height in pixels. With Keep proportions enabled, Loupe adjusts the other dimension to preserve the image shape. With it disabled, Loupe crops to the requested dimensions instead of stretching the image.</p>
+    </details>
+    <details>
+      <summary>Which image formats does Loupe support?</summary>
+      <p>Loupe accepts JPG, PNG, WebP and GIF images. You can export as JPG, PNG or WebP. An animated GIF is processed as a single still image.</p>
+    </details>
+    <details>
+      <summary>Are my images uploaded to a server?</summary>
+      <p>Loupe processes the selected image in your browser. The image itself is not uploaded to Loupe's servers. The page does load Google Fonts, and the hosting provider may keep standard server logs; see the Privacy Policy for those details.</p>
+    </details>
+    <details>
+      <summary>Can I prepare a passport-size or application photo?</summary>
+      <p>Loupe includes a 35:45 passport crop ratio and searchable photo and signature presets for common application workflows. Presets are unofficial and may not match a current form. Check the latest official notification or portal instructions before submitting a file.</p>
+    </details>
+    <details>
+      <summary>Can I change the DPI of an image?</summary>
+      <p>Loupe can write the selected DPI value into JPG files. DPI metadata is not written to PNG or WebP exports.</p>
+    </details>
+  </div>
+  <ul class="points">
+    <li>Input: JPG, PNG, WebP and GIF</li>
+    <li>Output: JPG, PNG and WebP</li>
+    <li>Resize by pixels or compress to a maximum KB limit</li>
+    <li>Browser-based image processing</li>
+  </ul>
 </section>
 <section id="support">
   <h2>Support and feedback</h2>
