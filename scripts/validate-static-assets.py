@@ -46,11 +46,11 @@ def check_page(path: Path, canonical: str, *, guide: bool = False) -> str:
     check(path.is_file(), "required page is missing: " + str(path.relative_to(ROOT)))
     html = path.read_text(encoding="utf-8")
     check(path.stat().st_size < MAX_HTML_BYTES, path.name + " is too large")
-    check(len(re.findall(r"<h1\\b", html, re.I)) == 1,
+    check(len(re.findall(r"<h1\b", html, re.I)) == 1,
           str(path.relative_to(ROOT)) + " must contain exactly one H1")
     check(len(re.findall(r"<title>[^<]+</title>", html, re.I)) == 1,
           str(path.relative_to(ROOT)) + " must contain exactly one title")
-    descriptions = re.findall(r'<meta\\s+name="description"\\s+content="([^"]+)"', html, re.I)
+    descriptions = re.findall(r'<meta\s+name="description"\s+content="([^"]+)"', html, re.I)
     check(len(descriptions) == 1 and len(descriptions[0]) >= 90,
           str(path.relative_to(ROOT)) + " needs one useful meta description")
     check('<link rel="canonical" href="' + canonical + '">' in html,
@@ -64,7 +64,7 @@ def check_page(path: Path, canonical: str, *, guide: bool = False) -> str:
     check("aggregateRating" not in html,
           str(path.relative_to(ROOT)) + " must not publish browser-local review aggregates")
     if guide:
-        words = len(re.findall(r"\\b[\\w'-]+\\b", re.sub(r"<[^>]+>", " ", html)))
+        words = len(re.findall(r"\b[\w'-]+\b", re.sub(r"<[^>]+>", " ", html)))
         check(words >= MIN_GUIDE_WORDS,
               str(path.relative_to(ROOT)) + " has too little visible content")
         check('href="' + BASE_URL + '#app"' in html,
@@ -92,8 +92,10 @@ check('"@type":"WebApplication"' in html and '"applicationCategory":"MultimediaA
 check("FAQPage" not in html, "do not add retired FAQ rich-result markup")
 
 references = set(re.findall(
-    r"""\\b(?:src|href|srcset|content)=["'](assets/[^"']+)["']""", html
+    r"""\b(?:src|href|srcset|content)=["'](assets/[^"']+)["']""", html
 ))
+if BASE_URL + "assets/loupe-social-card.jpg" in html:
+    references.add("assets/loupe-social-card.jpg")
 missing = sorted(path for path in references if not (ROOT / path).is_file())
 if missing:
     fail("referenced assets are missing: " + ", ".join(missing))
