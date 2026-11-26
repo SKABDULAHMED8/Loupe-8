@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Loupe-8 – Image Resizer, Compressor &amp; Converter Online</title>
-<meta name="description" content="Use Loupe-8 to resize, compress, crop, rotate, flip and convert images online. Adjust image dimensions and file sizes with browser-based image processing.">
+<meta name="description" content="Resize and compress images online with Loupe-8. Set pixel dimensions or KB limits, crop, convert and rotate images locally in your browser.">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="author" content="#AMAS_Creations">
 <meta name="application-name" content="Loupe-8">
@@ -12,12 +12,12 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Loupe-8">
 <meta property="og:title" content="Loupe-8 – Image Resizer, Compressor &amp; Converter Online">
-<meta property="og:description" content="Resize, compress, crop, rotate and convert images online with Loupe-8. Adjust dimensions and file sizes using browser-based image processing.">
+<meta property="og:description" content="Resize and compress images online with Loupe-8. Set pixel dimensions or KB limits, crop, convert and rotate images locally in your browser.">
 <meta property="og:url" content="https://skabdulahmed8.github.io/Loupe-8/">
 <meta property="og:image" content="https://raw.githubusercontent.com/SKABDULAHMED8/Loupe-8/main/LOUPE_Home_Logo1.png">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Loupe-8 – Image Resizer &amp; Compressor Online">
-<meta name="twitter:description" content="Resize, compress, crop and convert images in your browser with Loupe-8.">
+<meta name="twitter:description" content="Resize and compress images online. Set pixel dimensions or KB limits, crop, convert and rotate images locally with Loupe-8.">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/SKABDULAHMED8/Loupe-8/main/LOUPE_Home_Logo1.png">
 <script type="application/ld+json">
 {
@@ -108,6 +108,10 @@ footer{max-width:1080px;margin:0 auto;padding:24px 20px 40px;border-top:1px soli
 input[type=range]{padding:0;accent-color:var(--accent)}
 .legal{display:grid;gap:10px;margin-bottom:22px}
 details{border:1px solid var(--line);border-radius:12px;background:var(--card);padding:0 16px}
+.faq-list{display:grid;gap:14px;max-width:75ch}
+.faq-item{padding:12px 0;border-bottom:1px solid var(--line)}
+.faq-item h3{margin:0 0 6px}
+.faq-item p{margin:0;color:var(--muted)}
 summary{cursor:pointer;font-weight:700;color:var(--ink);padding:14px 0}
 details p,details li{max-width:75ch;margin:0 0 12px}
 details ul{margin:0;padding-left:20px}
@@ -215,7 +219,6 @@ addEventListener('DOMContentLoaded',()=>{if(sbOn)standby();document.getElementBy
 
 <link rel="icon" type="image/png" href="assets/loupe-favicon.png">
 <meta name="theme-color" content="#1269FF">
-<meta name="description" content="Loupe — make any image the exact size you need. Resize, compress, crop and convert images locally in your browser.">
 </head>
 <body>
 <div class="asset-protection-layer" aria-hidden="true"></div>
@@ -229,13 +232,13 @@ addEventListener('DOMContentLoaded',()=>{if(sbOn)standby();document.getElementBy
   <button type="button" id="sbx">Close</button>
 </div>
 <header class="bar">
-  <a class="logo" href="#" aria-label="Loupe home"><picture class="header-logo-picture"><source media="(prefers-color-scheme: dark)" srcset="assets/loupe-wordmark-dark.webp"><img class="header-logo-img" src="assets/loupe-wordmark-light.webp" alt="Loupe — Make Any Image The Exact Size You Need"></picture></a>
-  <nav><a href="#tools">Presets</a><a href="#support">Support</a><a href="#privacy">Privacy</a><a href="#terms">Terms</a></nav>
+  <a class="logo" href="#" aria-label="Loupe home"><picture class="header-logo-picture"><source media="(prefers-color-scheme: dark)" srcset="assets/loupe-wordmark-dark.webp"><img class="header-logo-img" width="2083" height="624" src="assets/loupe-wordmark-light.webp" alt="Loupe — Make Any Image The Exact Size You Need"></picture></a>
+  <nav><a href="#tools">Presets</a><a href="#faqs">FAQs</a><a href="#support">Support</a><a href="#privacy">Privacy</a><a href="#terms">Terms</a></nav>
 </header>
 <main>
 <section>
   <div class="brand-lockup">
-    <picture class="brand-logo-picture"><source media="(prefers-color-scheme: dark)" srcset="assets/loupe-lockup-dark.webp"><img src="assets/loupe-lockup-light.webp" alt="Loupe infinity magnifier logo — Make Any Image The Exact Size You Need"></picture>
+    <picture class="brand-logo-picture"><source media="(prefers-color-scheme: dark)" srcset="assets/loupe-lockup-dark.webp"><img width="1100" height="865" src="assets/loupe-lockup-light.webp" alt="Loupe infinity magnifier logo — Make Any Image The Exact Size You Need"></picture>
   </div>
   <h1>Resize, compress and crop images to fit your size limits</h1>
   <p class="lead">Set pixel sizes, keep files under a size limit or within a KB range, convert formats, crop and rotate. Images are processed locally in your browser and are not uploaded to Loupe's servers.</p>
@@ -245,7 +248,7 @@ addEventListener('DOMContentLoaded',()=>{if(sbOn)standby();document.getElementBy
   <div id="app">
     <label class="drop" id="drop">
     <input id="pick" type="file" accept="image/*">
-    <div class="drop-brand"><img class="icon-mark" src="assets/loupe-icon.webp" alt="" aria-hidden="true"><b id="drop-t">Drop an image here, paste one, or choose a file</b></div>
+    <div class="drop-brand"><img class="icon-mark" width="256" height="251" src="assets/loupe-icon.webp" alt="" aria-hidden="true"><b id="drop-t">Drop an image here, paste one, or choose a file</b></div>
     <span>JPG, PNG, WebP and GIF files work. An animated GIF becomes a single still image.</span>
   </label>
     <p id="msg" role="alert"></p>
@@ -309,6 +312,42 @@ addEventListener('DOMContentLoaded',()=>{if(sbOn)standby();document.getElementBy
   <div id="presets"></div>
   <p id="none" class="hint" hidden>No preset matches that search. Try a size like 100 KB or a format like PNG.</p>
 </section>
+<section id="faq" aria-labelledby="faq-title">
+  <h2 id="faq-title">Frequently asked questions about Loupe</h2>
+  <p class="lead">Answers about image formats, file-size limits, dimensions and privacy.</p>
+  <div class="faq-list">
+    <article class="faq-item">
+      <h3>Can I compress an image to an exact KB size?</h3>
+      <p>Set a maximum size in KB. Loupe searches for the highest JPG or WebP quality that stays at or below that limit. If quality reduction is not enough, it also reduces the pixel dimensions. The final file can be smaller than the limit; the maximum-size setting is not a promise of an exact file size.</p>
+    </article>
+    <article class="faq-item">
+      <h3>Can I resize an image to exact pixel dimensions?</h3>
+      <p>Yes. Enter the target width and height in pixels. With Keep proportions enabled, Loupe adjusts the other dimension to preserve the image shape. With it disabled, Loupe crops to the requested dimensions instead of stretching the image.</p>
+    </article>
+    <article class="faq-item">
+      <h3>Which image formats does Loupe support?</h3>
+      <p>Loupe accepts JPG, PNG, WebP and GIF images. You can export as JPG, PNG or WebP. An animated GIF is processed as a single still image.</p>
+    </article>
+    <article class="faq-item">
+      <h3>Are my images uploaded to a server?</h3>
+      <p>Loupe processes the selected image in your browser. The image itself is not uploaded to Loupe's servers. The page does load Google Fonts, and the hosting provider may keep standard server logs; see the Privacy Policy for those details.</p>
+    </article>
+    <article class="faq-item">
+      <h3>Can I prepare a passport-size or application photo?</h3>
+      <p>Loupe includes a 35:45 passport crop ratio and searchable photo and signature presets for common application workflows. Presets are unofficial and may not match a current form. Check the latest official notification or portal instructions before submitting a file.</p>
+    </article>
+    <article class="faq-item">
+      <h3>Can I change the DPI of an image?</h3>
+      <p>Loupe can write the selected DPI value into JPG files. DPI metadata is not written to PNG or WebP exports.</p>
+    </article>
+  </div>
+  <ul class="points">
+    <li>Input: JPG, PNG, WebP and GIF</li>
+    <li>Output: JPG, PNG and WebP</li>
+    <li>Resize by pixels or compress to a maximum KB limit</li>
+    <li>Browser-based image processing</li>
+  </ul>
+</section>
 <section id="support">
   <h2>Support and feedback</h2>
   <p class="lead" style="margin-bottom:24px">Questions, problems or ideas? Write to us by email.</p>
@@ -361,7 +400,7 @@ addEventListener('DOMContentLoaded',()=>{if(sbOn)standby();document.getElementBy
 
   <div class="amash-brand-section" aria-label="#AMAS_Creations">
     <div class="amash-brand-card">
-      <img class="amash-brand-ribbon protected-brand-asset" loading="lazy" decoding="async" draggable="false" src="assets/amash-brand-ribbon.webp" alt="#AMAS_Creations neon energy ribbon">
+      <img class="amash-brand-ribbon protected-brand-asset" width="2172" height="724" loading="lazy" decoding="async" draggable="false" src="assets/amash-brand-ribbon.webp" alt="#AMAS_Creations neon energy ribbon">
       <p class="amash-brand-title"><strong>BRAND</strong> · #AMAS_Creations™</p>
       <p class="amash-brand-caption">Crafted with <b>neon energy</b> for the Loupe web experience.</p>
     </div>
@@ -402,7 +441,7 @@ addEventListener('DOMContentLoaded',()=>{if(sbOn)standby();document.getElementBy
     </details>
   </div>
   <div class="credit">
-    <div class="footer-brand"><img src="assets/loupe-icon.webp" alt="Loupe icon" loading="lazy" decoding="async"></div>
+    <div class="footer-brand"><img width="256" height="251" src="assets/loupe-icon.webp" alt="Loupe icon" loading="lazy" decoding="async"></div>
     <p style="margin:0">© 2026 #AMAS_Creations™. All rights reserved.</p>
     <p style="margin:0">Created by #AMAS_Creations™</p>
     <nav class="fnav" aria-label="Legal and contact"><a href="#manual">How to Use</a><a href="#privacy">Privacy Policy</a><a href="#terms">Terms of Use</a><a href="#disclaimer">Disclaimer</a><a href="#contact">Contact</a></nav>
