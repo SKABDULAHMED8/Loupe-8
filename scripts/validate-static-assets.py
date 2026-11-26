@@ -2,6 +2,7 @@
 """Validate Loupe-8 static assets, SEO metadata, guide pages and sitemap."""
 
 from pathlib import Path
+import json
 import re
 import sys
 import xml.etree.ElementTree as ET
@@ -45,6 +46,20 @@ def check(condition: bool, message: str) -> None:
         fail(message)
 
 
+def check_json_ld(html: str, relative_path: str) -> None:
+    blocks = re.findall(
+        r'<script\s+type="application/ld\+json">([\s\S]*?)</script>',
+        html,
+        re.I,
+    )
+    check(bool(blocks), relative_path + " needs valid JSON-LD structured data")
+    for block in blocks:
+        try:
+            json.loads(block)
+        except json.JSONDecodeError as exc:
+            fail(relative_path + " contains invalid JSON-LD: " + str(exc))
+
+
 def check_page(path: Path, canonical: str, *, guide: bool = False) -> str:
     check(path.is_file(), "required page is missing: " + str(path.relative_to(ROOT)))
     html = path.read_text(encoding="utf-8")
@@ -66,6 +81,7 @@ def check_page(path: Path, canonical: str, *, guide: bool = False) -> str:
           str(path.relative_to(ROOT)) + " must reference the verified first-party brand image")
     check("aggregateRating" not in html,
           str(path.relative_to(ROOT)) + " must not publish browser-local review aggregates")
+    check_json_ld(html, str(path.relative_to(ROOT)))
     if guide:
         words = len(re.findall(r"\b[\w'-]+\b", re.sub(r"<[^>]+>", " ", html)))
         check(words >= MIN_GUIDE_WORDS,
@@ -81,6 +97,9 @@ html = check_page(HTML_PATH, BASE_URL)
 readme = README_PATH.read_text(encoding="utf-8")
 check("edgeone" not in readme.casefold(), "README must not advertise an EdgeOne backup host")
 check("edgeone" not in html.casefold(), "homepage must not reference an EdgeOne backup host")
+check("image.pi7.org" not in html.casefold(), "homepage must not direct visitors to a third-party image-processing fallback")
+check("addEventListener('unhandledrejection',standby)" not in html, "unrelated unhandled promise rejections must not trigger the blocking standby banner")
+check('id="standby-message"' in html, "homepage must include a first-party, contextual error message")
 check(HTML_PATH.stat().st_size < MAX_HTML_BYTES, "index.html exceeds the size limit")
 check("data:image/" not in html, "keep image assets outside index.html")
 check("<h1>Free online image resizer for exact pixels and KB limits</h1>" in html,
