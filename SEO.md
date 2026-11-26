@@ -44,6 +44,7 @@ Avoid publishing many near-identical keyword pages. Each guide must solve a dist
 - Homepage H1: Free online image resizer for exact pixels and KB limits
 - Description: Resize images to exact pixel dimensions, crop photos, compress JPG or WebP to a maximum KB limit, and convert JPG, PNG and WebP in your browser. Free, no signup.
 - Keep canonical, Open Graph URL, Twitter image, sitemap and page URL aligned. A first-party 1200 x 630 SVG Open Graph card and a raster PNG fallback are provided; preview clients may choose either or ignore the image.
+- Keep each page's standard meta description, `og:description` and `twitter:description` aligned in meaning and page-specific wording.
 - Google may rewrite title links, snippets, favicons and site labels. Metadata does not guarantee an exact display.
 - Homepage and guide pages now expose a purpose-built 1200 x 630 SVG Open Graph card. The existing PNG logo remains a fallback image, and X/Twitter retains the PNG because SVG support differs across preview services. Verify actual chat and social previews after deployment; metadata cannot force a platform to display a particular image.
 - The site now has a dedicated square 96 x 96 PNG favicon. Google may still use a generic icon because this is a GitHub Pages project subdirectory on a shared hostname; a separate site name and favicon at the project path are not guaranteed.
