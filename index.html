@@ -243,12 +243,26 @@ input[type=range]{height:32px}
 
 </style>
 <script>
-// Standby message: shown if the page crashes or a tool cannot finish the job
+// Show a user-facing notice only for a page script error or a known image-processing failure.
+// Do not treat every rejected Promise as a page failure: unrelated integrations can reject.
 let sbOn=false;
-function standby(){sbOn=true;const e=document.getElementById('standby');if(e)e.hidden=false}
-addEventListener('error',e=>{if(e.error)standby()});
-addEventListener('unhandledrejection',standby);
-addEventListener('DOMContentLoaded',()=>{if(sbOn)standby();document.getElementById('sbx').onclick=()=>document.getElementById('standby').hidden=true});
+function standby(message='Loupe could not complete that image operation. Check the message near the image tool, then try a smaller image or different settings.'){
+  sbOn=true;
+  const e=document.getElementById('standby');
+  if(e){
+    const detail=e.querySelector('[data-standby-message]');
+    if(detail)detail.textContent=message;
+    e.hidden=false;
+  }
+}
+addEventListener('error',e=>{
+  if(e.error)standby('A page script error interrupted Loupe. Reload the page and try again.');
+});
+addEventListener('DOMContentLoaded',()=>{
+  if(sbOn)standby();
+  const close=document.getElementById('sbx');
+  if(close)close.onclick=()=>document.getElementById('standby').hidden=true;
+});
 </script>
 
 <link rel="icon" type="image/png" href="assets/loupe-favicon.png">
@@ -256,12 +270,11 @@ addEventListener('DOMContentLoaded',()=>{if(sbOn)standby();document.getElementBy
 </head>
 <body>
 <div class="asset-protection-layer" aria-hidden="true"></div>
-<noscript><p class="standby" style="position:static;display:block"><b>Loupe needs JavaScript to process images.</b> You can use a temporary third-party alternative, image.pi7.org, which is a separate website. Files uploaded there are handled according to that website's own policies. Please review them before uploading. <a href="https://image.pi7.org/" target="_blank" rel="noopener noreferrer">Open image.pi7.org</a></p></noscript>
-<div class="standby" id="standby" role="alert" hidden>
+<noscript><p class="standby" style="position:static;display:block"><b>Loupe needs JavaScript to process images.</b> Enable JavaScript in your browser, then reload this page.</p></noscript>
+<div class="standby" id="standby" role="alert" aria-live="assertive" hidden>
   <div>
-    <p><b>Loupe is currently in standby mode.</b> You can continue with image processing using a temporary third-party alternative, image.pi7.org. Please review that service's privacy policy before uploading images.</p>
-    <p class="warn"><b>Important:</b> image.pi7.org is a separate third-party website. Files uploaded there are handled according to that website's own policies. It is not run by Loupe or #AMAS_Creations, and Loupe's privacy statements do not apply to it.</p>
-    <p><a href="https://image.pi7.org/" target="_blank" rel="noopener noreferrer">Open image.pi7.org (third-party site, opens in a new tab)</a></p>
+    <p><b>Image processing could not finish.</b> <span data-standby-message>Check the message near the image tool, then try a smaller image or different settings.</span></p>
+    <p class="warn">Large images and unsupported browser features can exceed available memory or export limits. Your selected image is processed in this browser.</p>
   </div>
   <button type="button" id="sbx">Close</button>
 </div>
@@ -532,7 +545,7 @@ addEventListener('DOMContentLoaded',()=>{if(sbOn)standby();document.getElementBy
       <p><b>Accounts, cookies and analytics.</b> Loupe does not ask you to create an account. Loupe's own code sets no cookies and includes no analytics or advertising trackers.</p>
       <p><b>Fonts and hosting.</b> The page loads fonts from Google Fonts, so Google receives your IP address and browser details when the page loads. The hosting provider may also keep standard server logs. Loupe does not control either.</p>
       <p><b>Emails.</b> Only the support/contact form opens your own email app for connection, support or other relevant subjects. Reviews are handled only inside the web app and never sent to email. If you send a support email, #AMAS_Creations receives the message, your email address and any contact number you include, and your email provider handles it under its own terms.</p>
-      <p><b>Third-party sites.</b> If Loupe links to another website, such as the standby link to image.pi7.org, that website is run by someone else and its own policies apply to anything you do there. Loupe's privacy statements do not cover it.</p>
+      <p><b>Third-party sites.</b> Any external website linked from Loupe is operated by its own provider. Its terms and privacy policy apply to activity on that website. Loupe's privacy statements do not cover external sites.</p>
       <p><b>Your choices.</b> Clear your browser's site data to remove your saved rating. To ask about an email you sent, write to amashcreations5@gmail.com.</p>
       <p><b>Changes.</b> If this policy changes, the new version and date will appear here.</p>
     </details>
@@ -552,7 +565,7 @@ addEventListener('DOMContentLoaded',()=>{if(sbOn)standby();document.getElementBy
       <p>Loupe is not affiliated with or endorsed by SSC, IBPS, SBI, UPSC, NTA, RRB, IIT, Parivahan, NSDL, UTIITSL or any other government body or exam authority. Their names are used only to describe the file formats they ask for. All trademarks belong to their owners.</p>
       <p>If a form requires a minimum JPEG file size, Loupe can add non-image data to increase the file size without changing the visible image. This does not guarantee that a portal will accept the file.</p>
       <p>Maximum sizes are limits, not exact targets. Loupe counts 1 KB as 1,000 bytes for maximums and 1,024 bytes for minimums. Animated GIFs are read as a single still image. Results can differ slightly between browsers and devices, so check every file before you submit it.</p>
-      <p>The standby message links to image.pi7.org, a separate third-party website. It is not part of Loupe and is not run by #AMAS_Creations. Files uploaded there are handled according to that website's own policies, not Loupe's. Please review them before you upload anything.</p>
+      <p>Links to external websites are provided for convenience. Loupe does not operate or control those websites. Review their terms and privacy policies before using them.</p>
       <p>Nothing on this site is legal advice.</p>
     </details>
     <details id="contact"><summary>Contact and copyright</summary>
@@ -791,7 +804,7 @@ $('#dl').onclick=async()=>{
     else{const a=document.createElement('a');a.href=url;a.download=result.name;document.body.append(a);a.click();a.remove()}
     msg('')
   }catch(e){if(!e||e.code!=='declined')msg('The download did not complete. Try again, or save the preview image by long-pressing or right-clicking it.')}};
-if(!HTMLCanvasElement.prototype.toBlob)standby();
+if(!HTMLCanvasElement.prototype.toBlob)standby('Your browser does not support Canvas image export. Update your browser or open Loupe in a current browser.');
 function openLegal(){const d=document.getElementById(location.hash.slice(1));if(d&&d.tagName==='DETAILS')d.open=true}
 addEventListener('hashchange',openLegal);openLegal();
 $$('.fnav a,.bar nav a').forEach(a=>a.addEventListener('click',()=>{const d=document.getElementById(a.hash.slice(1));if(d&&d.tagName==='DETAILS')d.open=true}));
