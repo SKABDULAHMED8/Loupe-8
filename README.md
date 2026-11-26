@@ -1,4 +1,8 @@
-# 🔍 Loupe — Image Tool in Your Browser. 
+# Loupe-8: Free Online Image Resizer, Compressor & Converter
+
+**Loupe-8 is a free online image resizer for exact pixel dimensions, photo crops, JPG/WebP compression to a maximum KB limit, and JPG, PNG or WebP conversion.** It runs image processing in your browser and does not upload selected images to a Loupe image-processing server. No account or signup is required.
+
+Use it to prepare profile pictures, scanned signatures and images for online forms. Always follow the current requirements of the form where you will submit the image; Loupe-8 does not certify or guarantee portal acceptance.
 
 <p align="center">
   <a href="https://skabdulahmed8.github.io/Loupe-8/" target="_blank">
@@ -41,9 +45,11 @@
 
 ---
 
-# 📌 About Loupe
+# About Loupe-8
 
-**Loupe** is a simple browser-based image utility application created to make everyday image-processing tasks easier.
+**Loupe-8 is a free browser-based image resizer, compressor and converter.** It lets users set exact pixel dimensions, crop without stretching, compress JPG or WebP to a maximum KB limit, convert JPG, PNG and WebP formats, rotate images and flip them. Selected images are processed in the browser.
+
+Loupe-8 is useful for everyday image preparation, including online-form uploads, profile pictures and existing scanned signatures. The destination website's current format, pixel and file-size rules must always take priority.
 
 Instead of installing a full image-editing application for basic operations, Loupe lets you work with images directly in your browser.
 

@@ -17,6 +17,8 @@ GUIDE_PATHS = (
     "guides/compress-image-to-20kb-or-50kb/index.html",
     "guides/resize-image-to-exact-pixels/index.html",
     "guides/profile-photo-resizer/index.html",
+    "guides/resize-and-compress-image-for-online-form/index.html",
+    "guides/convert-image-to-jpg-png-webp/index.html",
 )
 EXPECTED_ASSETS = {
     "assets/loupe-favicon.png": b"\x89PNG\r\n\x1a\n",
@@ -77,16 +79,34 @@ def check_page(path: Path, canonical: str, *, guide: bool = False) -> str:
 html = check_page(HTML_PATH, BASE_URL)
 check(HTML_PATH.stat().st_size < MAX_HTML_BYTES, "index.html exceeds the size limit")
 check("data:image/" not in html, "keep image assets outside index.html")
-check("<h1>Resize photos and signatures for online forms</h1>" in html,
-      "homepage H1 does not target application photos and signatures")
+check("<h1>Free online image resizer for exact pixels and KB limits</h1>" in html,
+      "homepage H1 does not target general image-resizing intent")
+check("<title>Free Online Image Resizer &amp; Compressor | Loupe-8</title>" in html,
+      "homepage title does not describe the image-resizer category")
+check('id="tool-summary"' in html,
+      "homepage needs an answer-first tool summary")
+check('<table class="capability-table">' in html,
+      "homepage needs a capability and limitation comparison table")
+for required_limit in (
+    "Exact output file size, such as exactly 20 KB",
+    "An animated GIF is processed as a single still image",
+    "It does not remove or replace backgrounds",
+    "It does not draw or create a digital signature",
+):
+    check(required_limit in html,
+          "homepage capability table is missing: " + required_limit)
+
+check('guides/resize-and-compress-image-for-online-form/' in html and
+      'guides/convert-image-to-jpg-png-webp/' in html,
+      "homepage must link to both new task guides")
 check('name="twitter:card" content="summary_large_image"' in html,
       "homepage Twitter card must use summary_large_image")
 check('og:image:width" content="2146"' in html and 'og:image:height" content="733"' in html,
       "homepage social image dimensions must match the existing 2146 x 733 PNG")
 check('href="guides/' in html, "homepage must link to its guide cluster")
 check('href="#faq"' in html, "FAQ navigation must target the real FAQ anchor")
-check(len(re.findall(r'<article class="faq-item">', html)) >= 10,
-      "homepage needs at least ten visible FAQ answers")
+check(len(re.findall(r'<article class="faq-item">', html)) >= 13,
+      "homepage needs at least thirteen visible FAQ answers")
 check('"@type":"WebApplication"' in html and '"applicationCategory":"MultimediaApplication"' in html,
       "WebApplication schema is missing")
 check("FAQPage" not in html, "do not add retired FAQ rich-result markup")
@@ -120,6 +140,10 @@ guide_index = ROOT / "guides/index.html"
 check(guide_index.is_file(), "guides/index.html is missing")
 guide_index_html = check_page(guide_index, BASE_URL + "guides/")
 check("CollectionPage" in guide_index_html, "guide index needs CollectionPage schema")
+for relative in GUIDE_PATHS:
+    target = BASE_URL + relative.removesuffix("index.html")
+    check(target in guide_index_html,
+          "guide index must link to " + target)
 
 try:
     sitemap_tree = ET.parse(SITEMAP_PATH)
