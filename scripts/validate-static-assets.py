@@ -9,6 +9,7 @@ import xml.etree.ElementTree as ET
 ROOT = Path(__file__).resolve().parents[1]
 HTML_PATH = ROOT / "index.html"
 SITEMAP_PATH = ROOT / "sitemap.xml"
+README_PATH = ROOT / "README.md"
 BASE_URL = "https://skabdulahmed8.github.io/Loupe-8/"
 SOCIAL_IMAGE = "https://skabdulahmed8.github.io/Loupe-8/LOUPE_Home_Logo1.png"
 GUIDE_PATHS = (
@@ -77,6 +78,9 @@ def check_page(path: Path, canonical: str, *, guide: bool = False) -> str:
 
 
 html = check_page(HTML_PATH, BASE_URL)
+readme = README_PATH.read_text(encoding="utf-8")
+check("edgeone" not in readme.casefold(), "README must not advertise an EdgeOne backup host")
+check("edgeone" not in html.casefold(), "homepage must not reference an EdgeOne backup host")
 check(HTML_PATH.stat().st_size < MAX_HTML_BYTES, "index.html exceeds the size limit")
 check("data:image/" not in html, "keep image assets outside index.html")
 check("<h1>Free online image resizer for exact pixels and KB limits</h1>" in html,
@@ -134,7 +138,8 @@ check(asset_total < MAX_ASSET_BYTES, "optimized static assets exceed 1 MB")
 
 for relative in GUIDE_PATHS:
     canonical = BASE_URL + relative.removesuffix("index.html")
-    check_page(ROOT / relative, canonical, guide=True)
+    guide_html = check_page(ROOT / relative, canonical, guide=True)
+    check("edgeone" not in guide_html.casefold(), relative + " must not reference an EdgeOne backup host")
 
 guide_index = ROOT / "guides/index.html"
 check(guide_index.is_file(), "guides/index.html is missing")
@@ -151,6 +156,8 @@ except (ET.ParseError, OSError) as exc:
     fail("sitemap.xml is missing or invalid: " + str(exc))
 ns = {"sm": "http://www.sitemaps.org/schemas/sitemap/0.9"}
 sitemap_urls = {node.text for node in sitemap_tree.findall(".//sm:loc", ns)}
+check(all(url and url.startswith(BASE_URL) for url in sitemap_urls),
+      "sitemap must contain only URLs under the canonical GitHub Pages project path")
 required = {BASE_URL, BASE_URL + "guides/"} | {
     BASE_URL + path.removesuffix("index.html") for path in GUIDE_PATHS
 }
