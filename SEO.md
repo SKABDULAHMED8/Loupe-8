@@ -35,6 +35,7 @@ Supporting guides target different tasks:
 - Cropping and resizing a profile picture.
 - Resizing and compressing an image for an online form in one workflow.
 - Converting images to JPG, PNG or WebP, including transparency and GIF limitations.
+- Preparing existing photographs and scanned signatures for government recruitment application forms, including SSC, UPSC, IBPS, RRB and state recruitment workflows. The guide explains that each current notice defines its own limits and that some portals use live photo capture.
 
 Avoid publishing many near-identical keyword pages. Each guide must solve a distinct task, include accurate tool behavior, and link to the editor and related guides.
 
@@ -42,9 +43,10 @@ Avoid publishing many near-identical keyword pages. Each guide must solve a dist
 - Homepage title: Free Online Image Resizer & Compressor | Loupe-8
 - Homepage H1: Free online image resizer for exact pixels and KB limits
 - Description: Resize images to exact pixel dimensions, crop photos, compress JPG or WebP to a maximum KB limit, and convert JPG, PNG and WebP in your browser. Free, no signup.
-- Keep canonical, Open Graph URL, Twitter image, sitemap and page URL aligned.
+- Keep canonical, Open Graph URL, Twitter image, sitemap and page URL aligned. A first-party 1200 x 630 SVG Open Graph card and a raster PNG fallback are provided; preview clients may choose either or ignore the image.
 - Google may rewrite title links, snippets, favicons and site labels. Metadata does not guarantee an exact display.
-- The current social preview uses `LOUPE_Home_Logo1.png` at 2146 x 733. It is a wide logo asset, not an ideal dedicated 1200 x 630 share card. A purpose-built share image remains a follow-up improvement.
+- Homepage and guide pages now expose a purpose-built 1200 x 630 SVG Open Graph card. The existing PNG logo remains a fallback image, and X/Twitter retains the PNG because SVG support differs across preview services. Verify actual chat and social previews after deployment; metadata cannot force a platform to display a particular image.
+- The site now has a dedicated square 96 x 96 PNG favicon. Google may still use a generic icon because this is a GitHub Pages project subdirectory on a shared hostname; a separate site name and favicon at the project path are not guaranteed.
 - Google does not support a separate site name for a GitHub Pages project subdirectory. A custom domain is the longer-term brand-identity improvement.
 
 ## Structured data
@@ -52,6 +54,7 @@ Avoid publishing many near-identical keyword pages. Each guide must solve a dist
 - Guide articles: Article and visible BreadcrumbList.
 - Guide index: CollectionPage.
 - Do not add aggregateRating: local browser ratings are not public, verifiable aggregates.
+- Do not create bot-generated testimonials, artificial review counts or unverified star ratings. Use transparent product facts and real, independently verifiable feedback only.
 - Do not add FAQPage expecting Google FAQ rich results; structured data must match visible page content.
 - Do not add fake reviews, unsupported "best" claims or universal acceptance promises.
 - Structured data helps describe the visible page; it does not guarantee a rich result or AI citation.
@@ -69,7 +72,7 @@ Avoid publishing many near-identical keyword pages. Each guide must solve a dist
 
 ## Privacy and trust
 - State that selected images are processed in the browser and are not uploaded to a Loupe image-processing server.
-- Do not claim that no data is transmitted anywhere: the page loads Google Fonts and the hosting provider may retain standard server logs.
+- The homepage uses local system fonts and does not request Google Fonts. Its scripts and image assets are local; the current homepage source contains no analytics beacon, external script import or application fetch call. GitHub Pages and network infrastructure may still keep standard server logs.
 - Ratings and reviews remain in the current browser and are not public testimonials.
 - Do not suggest users upload sensitive identity images to a third-party alternative.
 
@@ -95,7 +98,7 @@ Implementation rules:
 - Do not add llms.txt, special AI schema, FAQPage markup, or artificial text chunking as a supposed Google AI ranking shortcut. Google says standard search eligibility and helpful content remain the basis for its AI search features; no extra special schema is required.
 - Treat Bing/Copilot eligibility and citations as dependent on crawlability, indexing, content quality and policy compliance. GEO improvements do not guarantee grounding or citation.
 
-The homepage and seven task-specific guides already form the current topic cluster. Add another indexable page only when it answers a distinct user task with original, maintainable information.
+The homepage and eight task-specific guides form the current topic cluster. Add another indexable page only when it answers a distinct user task with original, maintainable information.
 
 ## AI search and answer-engine readiness
 - Keep important explanatory content in the delivered HTML, not only in JavaScript-generated UI.

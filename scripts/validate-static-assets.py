@@ -12,7 +12,7 @@ HTML_PATH = ROOT / "index.html"
 SITEMAP_PATH = ROOT / "sitemap.xml"
 README_PATH = ROOT / "README.md"
 BASE_URL = "https://skabdulahmed8.github.io/Loupe-8/"
-SOCIAL_IMAGE = "https://skabdulahmed8.github.io/Loupe-8/LOUPE_Home_Logo1.png"
+SOCIAL_IMAGE = "https://skabdulahmed8.github.io/Loupe-8/assets/loupe-social-card.svg"
 GUIDE_PATHS = (
     "guides/passport-photo-for-online-forms/index.html",
     "guides/signature-image-for-online-forms/index.html",
@@ -21,9 +21,12 @@ GUIDE_PATHS = (
     "guides/profile-photo-resizer/index.html",
     "guides/resize-and-compress-image-for-online-form/index.html",
     "guides/convert-image-to-jpg-png-webp/index.html",
+    "guides/government-job-application-photo-signature/index.html",
 )
 EXPECTED_ASSETS = {
     "assets/loupe-favicon.png": b"\x89PNG\r\n\x1a\n",
+    "assets/loupe-favicon-search.png": b"\x89PNG\r\n\x1a\n",
+    "assets/loupe-social-card.svg": b"<?xml",
     "assets/loupe-icon.webp": b"RIFF",
     "assets/loupe-wordmark-light.webp": b"RIFF",
     "assets/loupe-wordmark-dark.webp": b"RIFF",
@@ -79,7 +82,9 @@ def check_page(path: Path, canonical: str, *, guide: bool = False) -> str:
     check("og:image" in html and "twitter:card" in html,
           str(path.relative_to(ROOT)) + " needs social metadata")
     check(SOCIAL_IMAGE in html,
-          str(path.relative_to(ROOT)) + " must reference the verified first-party brand image")
+          str(path.relative_to(ROOT)) + " must reference the first-party social card")
+    check('og:image:width" content="1200"' in html and 'og:image:height" content="630"' in html,
+          str(path.relative_to(ROOT)) + " social image metadata must describe the 1200 x 630 card")
     check("aggregateRating" not in html,
           str(path.relative_to(ROOT)) + " must not publish browser-local review aggregates")
     image_tags = re.findall(r"<img\b[^>]*>", html, re.I)
@@ -125,8 +130,8 @@ check('guides/resize-and-compress-image-for-online-form/' in html and
       "homepage must link to both new task guides")
 check('name="twitter:card" content="summary_large_image"' in html,
       "homepage Twitter card must use summary_large_image")
-check('og:image:width" content="2146"' in html and 'og:image:height" content="733"' in html,
-      "homepage social image dimensions must match the existing 2146 x 733 PNG")
+check('og:image:width" content="1200"' in html and 'og:image:height" content="630"' in html,
+      "homepage social image metadata must describe the 1200 x 630 card")
 check('href="guides/' in html, "homepage must link to its guide cluster")
 check('href="#faq"' in html, "FAQ navigation must target the real FAQ anchor")
 check(len(re.findall(r'<article class="faq-item">', html)) >= 13,
@@ -138,6 +143,8 @@ check("FAQPage" not in html, "do not add retired FAQ rich-result markup")
 references = set(re.findall(
     r"""\b(?:src|href|srcset|content)=["'](assets/[^"']+)["']""", html
 ))
+if SOCIAL_IMAGE in html:
+    references.add("assets/loupe-social-card.svg")
 missing = sorted(path for path in references if not (ROOT / path).is_file())
 if missing:
     fail("referenced assets are missing: " + ", ".join(missing))
@@ -153,6 +160,13 @@ for relative, signature in EXPECTED_ASSETS.items():
     check(data.startswith(signature), "invalid file signature: " + relative)
     if path.suffix == ".webp":
         check(data[8:12] == b"WEBP", "invalid WebP file: " + relative)
+    if relative == "assets/loupe-favicon-search.png":
+        check(len(data) >= 24 and int.from_bytes(data[16:20], "big") == 96 and
+              int.from_bytes(data[20:24], "big") == 96,
+              "search favicon must be a square 96 x 96 PNG")
+    if relative == "assets/loupe-social-card.svg":
+        check(b'width="1200"' in data and b'height="630"' in data and b"<svg" in data,
+              "social card must be a 1200 x 630 SVG")
     asset_total += len(data)
 check(asset_total < MAX_ASSET_BYTES, "optimized static assets exceed 1 MB")
 
@@ -160,6 +174,10 @@ for relative in GUIDE_PATHS:
     canonical = BASE_URL + relative.removesuffix("index.html")
     guide_html = check_page(ROOT / relative, canonical, guide=True)
     check("edgeone" not in guide_html.casefold(), relative + " must not reference an EdgeOne backup host")
+    if "government-job-application-photo-signature" in relative:
+        for term in ("government job application", "ssc", "upsc", "ibps", "rrb", "official notice", "live photo", "does not fill", "submit"):
+            check(term in guide_html.casefold(),
+                  "government recruitment guide is missing required topic or limitation: " + term)
 
 guide_index = ROOT / "guides/index.html"
 check(guide_index.is_file(), "guides/index.html is missing")
