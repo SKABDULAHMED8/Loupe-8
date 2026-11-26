@@ -131,7 +131,7 @@ all_pages = [HTML_PATH, guide_index] + [ROOT / path for path in GUIDE_PATHS]
 for page in all_pages:
     page_html = page.read_text(encoding="utf-8")
     blocks = re.findall(
-        r'<script\\s+type="application/ld\\+json">\\s*(.*?)\\s*</script>',
+        r'<script\s+type="application/ld\+json">\s*(.*?)\s*</script>',
         page_html, re.I | re.S
     )
     check(bool(blocks), str(page.relative_to(ROOT)) + " needs JSON-LD structured data")
