@@ -12,6 +12,18 @@
 - Add the exact project URL to Bing Webmaster Tools as well. Check Bing's AI Performance report when available; it reports citations from Copilot and Bing AI answers, not Google rankings.
 - A separate user-site repository or custom domain would be required to control the hostname root and publish a host-level `robots.txt`. That is outside this repository's scope and needs a separate decision.
 
+## Google Search Console: generative AI control
+
+Google provides a separate **Search generative AI control** in Search Console settings. It manages whether a site's content can be used for grounding or displayed with links in Google Search generative AI features such as AI Overviews and AI Mode.
+
+- For Loupe-8, keep this control set to allow inclusion if the goal is to appear as a supporting source in Google AI Search features.
+- This setting is separate from ordinary Google Search ranking. Changing it does not improve or reduce standard blue-link rankings.
+- Keep Googlebot crawling allowed and pages indexable. A page must still be indexed and eligible for a Search snippet before it can be considered for Google AI Search features.
+- Do not confuse this setting with `Google-Extended`. Google documents `Google-Extended` as a control for model training and grounding on non-Search generative AI products; it is not the switch for appearing in AI Overviews or AI Mode.
+- This is an account-level Search Console setting. Repository code cannot enable it on the owner's behalf.
+
+Official control details: https://developers.google.com/search/docs/fundamentals/gen-ai-controls
+
 ## Search intent and page map
 The homepage targets the broad category "free online image resizer" and explains exact pixel dimensions, maximum KB limits and image-format conversion.
 
