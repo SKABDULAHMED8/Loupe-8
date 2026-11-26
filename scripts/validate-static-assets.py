@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 HTML_PATH = ROOT / "index.html"
 SITEMAP_PATH = ROOT / "sitemap.xml"
 BASE_URL = "https://skabdulahmed8.github.io/Loupe-8/"
-SOCIAL_IMAGE = "https://raw.githubusercontent.com/SKABDULAHMED8/Loupe-8/main/LOUPE_Home_Logo1.png"
+SOCIAL_IMAGE = "https://skabdulahmed8.github.io/Loupe-8/LOUPE_Home_Logo1.png"
 GUIDE_PATHS = (
     "guides/passport-photo-for-online-forms/index.html",
     "guides/signature-image-for-online-forms/index.html",
