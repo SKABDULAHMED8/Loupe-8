@@ -17,6 +17,7 @@ GUIDE_PATHS = (
     "guides/compress-image-to-20kb-or-50kb/index.html",
     "guides/resize-image-to-exact-pixels/index.html",
     "guides/profile-photo-resizer/index.html",
+    "guides/image-resizer-for-online-forms/index.html",
 )
 EXPECTED_ASSETS = {
     "assets/loupe-favicon.png": b"\x89PNG\r\n\x1a\n",
@@ -77,7 +78,7 @@ def check_page(path: Path, canonical: str, *, guide: bool = False) -> str:
 html = check_page(HTML_PATH, BASE_URL)
 check(HTML_PATH.stat().st_size < MAX_HTML_BYTES, "index.html exceeds the size limit")
 check("data:image/" not in html, "keep image assets outside index.html")
-check("<h1>Resize photos and signatures for online forms</h1>" in html,
+check("<h1>Free online image resizer and compressor</h1>" in html,
       "homepage H1 does not target application photos and signatures")
 check('name="twitter:card" content="summary_large_image"' in html,
       "homepage Twitter card must use summary_large_image")
