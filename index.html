@@ -231,6 +231,16 @@ input[type=range]{height:32px}
   background:transparent;user-select:none;-webkit-user-select:none;
 }
 
+
+.capability-check{margin-top:24px}
+.capability-check h3{margin:0 0 10px;font-size:1.12rem}
+.capability-table-wrap{max-width:100%;overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--card)}
+.capability-table{width:100%;min-width:680px;border-collapse:collapse;color:var(--ink)}
+.capability-table caption{text-align:left;padding:12px;font-weight:700;color:var(--ink)}
+.capability-table th,.capability-table td{padding:11px 12px;border:1px solid var(--line);text-align:left;vertical-align:top}
+.capability-table th{background:var(--tint);font-weight:700}
+.capability-table td:nth-child(2){font-weight:700}
+
 </style>
 <script>
 // Standby message: shown if the page crashes or a tool cannot finish the job
@@ -340,6 +350,25 @@ addEventListener('DOMContentLoaded',()=>{if(sbOn)standby();document.getElementBy
       <article class="manual-step"><h3>Rotate and flip</h3><p>Rotate an image left or right, or flip it horizontally or vertically. Preview the direction before you download the new file.</p></article>
       <article class="manual-step"><h3>Set JPG DPI and file-size bounds</h3><p>The Resize tool can write DPI metadata to JPG and apply optional minimum and maximum JPG file-size values. Minimum-size padding does not improve image quality.</p></article>
     </div>
+    
+    <div class="capability-check" id="capability-check">
+      <h3>Does Loupe-8 support your exact image requirement?</h3>
+      <div class="capability-table-wrap" role="region" aria-label="Loupe-8 capabilities and limitations" tabindex="0">
+        <table class="capability-table">
+          <caption>Supported tasks and important limits</caption>
+          <thead><tr><th scope="col">Requirement</th><th scope="col">Support</th><th scope="col">What to expect</th></tr></thead>
+          <tbody>
+            <tr><td>Exact pixel width and height</td><td>Supported</td><td>Enter both dimensions. Keep proportions to preserve the full image shape, or turn it off to crop to the exact frame. Loupe does not stretch the image.</td></tr>
+            <tr><td>Exact output file size, such as exactly 20 KB</td><td>Not guaranteed</td><td>Set a maximum KB limit. The exported file can be smaller than that limit; the value is a ceiling, not an exact target.</td></tr>
+            <tr><td>Transparent image background</td><td>PNG and WebP</td><td>Transparency can be retained in PNG or WebP output. JPG does not support transparency and fills transparent areas with white.</td></tr>
+            <tr><td>Animated GIF output</td><td>Not supported</td><td>An animated GIF is processed as a single still image. Its animation frames are not preserved.</td></tr>
+            <tr><td>Photo background removal</td><td>Not supported</td><td>Loupe can crop, resize, compress, convert, rotate and flip an image. It does not remove or replace backgrounds.</td></tr>
+            <tr><td>Create or draw a digital signature</td><td>Not supported</td><td>Loupe can resize an existing scanned signature image. It does not draw or create a digital signature.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
     <p class="note">Important: a maximum KB value is a limit, not an exact output-size guarantee. DPI metadata is written to JPG exports only. Check the destination portal's current file requirements before submitting.</p>
   </section>
 
