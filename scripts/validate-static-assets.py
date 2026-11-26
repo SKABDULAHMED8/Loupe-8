@@ -25,7 +25,7 @@ GUIDE_PATHS = (
 )
 EXPECTED_ASSETS = {
     "assets/loupe-favicon.png": b"\x89PNG\r\n\x1a\n",
-    "assets/loupe-favicon-search.png": b"\\x89PNG\\r\\n\\x1a\\n",
+    "assets/loupe-favicon-search.png": b"\x89PNG\r\n\x1a\n",
     "assets/loupe-social-card.svg": b"<?xml",
     "assets/loupe-icon.webp": b"RIFF",
     "assets/loupe-wordmark-light.webp": b"RIFF",
