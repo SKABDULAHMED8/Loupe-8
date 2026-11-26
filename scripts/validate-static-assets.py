@@ -85,6 +85,17 @@ check("<title>Free Online Image Resizer &amp; Compressor | Loupe-8</title>" in h
       "homepage title does not describe the image-resizer category")
 check('id="tool-summary"' in html,
       "homepage needs an answer-first tool summary")
+check('<table class="capability-table">' in html,
+      "homepage needs a capability and limitation comparison table")
+for required_limit in (
+    "Exact output file size, such as exactly 20 KB",
+    "An animated GIF is processed as a single still image",
+    "It does not remove or replace backgrounds",
+    "It does not draw or create a digital signature",
+):
+    check(required_limit in html,
+          "homepage capability table is missing: " + required_limit)
+
 check('guides/resize-and-compress-image-for-online-form/' in html and
       'guides/convert-image-to-jpg-png-webp/' in html,
       "homepage must link to both new task guides")
