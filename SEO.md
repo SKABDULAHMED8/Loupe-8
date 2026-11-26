@@ -12,6 +12,27 @@
 - Add the exact project URL to Bing Webmaster Tools as well. Check Bing's AI Performance report when available; it reports citations from Copilot and Bing AI answers, not Google rankings.
 - A separate user-site repository or custom domain would be required to control the hostname root and publish a host-level `robots.txt`. That is outside this repository's scope and needs a separate decision.
 
+
+## Google Search Central SEO Starter Guide baseline
+
+Treat Google's own documentation as the primary standard for Google Search. The current implementation should follow these rules:
+
+- Publish useful, original, accurate and maintained content for people. Each guide must solve a distinct image-preparation task; do not create near-duplicate keyword pages.
+- Use one descriptive, page-specific title element, one clear H1 and a concise, page-specific meta description. Google may generate a different title link or snippet from visible page content; metadata does not guarantee exact wording or ranking.
+- Keep each page's canonical URL aligned with its Open Graph URL and sitemap entry. Keep internal navigation as normal crawlable anchor links with descriptive link text.
+- Add descriptive alt text to meaningful images. Keep key explanatory text, limitations and practical steps in HTML that a crawler can access.
+- Use structured data only when it accurately describes visible page content. Valid JSON-LD can make a page eligible for supported search features, but it does not guarantee a rich result.
+- Do not add a meta-keywords tag: Google Search does not use it. Do not repeat target phrases unnaturally or add blocks of keyword variants. Google's guide specifies no magic minimum or maximum word count for ranking.
+- Use the sitemap as a discovery aid containing the preferred canonical URLs. It is optional and does not guarantee crawling or indexing. This project currently has nine canonical URLs; do not replace them with only the homepage.
+- Use Search Console's URL Inspection to distinguish the live page test from the indexed version. Use the Sitemaps report to check whether the sitemap was already submitted and fetched before submitting it again.
+
+Primary references:
+- [Google SEO Starter Guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide)
+- [Google Search Essentials](https://developers.google.com/search/docs/essentials)
+- [Google spam policies: keyword stuffing](https://developers.google.com/search/docs/essentials/spam-policies#keyword-stuffing)
+- [Google: crawlable links](https://developers.google.com/search/docs/crawling-indexing/links-crawlable)
+- [Search Console URL Inspection](https://support.google.com/webmasters/answer/9012289/)
+
 ## Search intent and page map
 The homepage targets the broad category "free online image resizer" and explains exact pixel dimensions, maximum KB limits and image-format conversion.
 
