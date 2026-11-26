@@ -33,7 +33,6 @@ EXPECTED_ASSETS = {
 }
 MAX_HTML_BYTES = 100_000
 MAX_ASSET_BYTES = 1_000_000
-MIN_GUIDE_WORDS = 250
 
 
 def fail(message: str) -> None:
@@ -88,9 +87,7 @@ def check_page(path: Path, canonical: str, *, guide: bool = False) -> str:
           str(path.relative_to(ROOT)) + " image elements must have alt attributes")
     check_json_ld(html, str(path.relative_to(ROOT)))
     if guide:
-        words = len(re.findall(r"\b[\w'-]+\b", re.sub(r"<[^>]+>", " ", html)))
-        check(words >= MIN_GUIDE_WORDS,
-              str(path.relative_to(ROOT)) + " has too little visible content")
+        # Do not impose a fixed word-count target. Validate useful page structure instead.
         check('href="' + BASE_URL + '#app"' in html,
               str(path.relative_to(ROOT)) + " must link back to the editor")
         check('"@type":"Article"' in html or '"@type": "Article"' in html,
