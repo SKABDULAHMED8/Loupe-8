@@ -79,6 +79,7 @@ Implementation rules:
 - Keep visible page content and JSON-LD consistent. JSON-LD must be valid JSON and must not describe ratings, reviews, guarantees or features that the page cannot substantiate.
 - Prefer direct answers, practical steps, real examples, explicit limitations and links to the relevant official application instructions. Keep application requirements date-sensitive and avoid presenting one portal's limits as a universal Indian standard.
 - Do not add meta keywords, keyword-stuffed copy, near-duplicate pages, fake author credentials, fake reviews, or unverified third-party citation claims.
+- Do not enforce a fixed minimum or maximum word count as an SEO rule. Page length alone is not a Google ranking target; keep enough content to solve the user's task clearly.
 - Do not add llms.txt, special AI schema, FAQPage markup, or artificial text chunking as a supposed Google AI ranking shortcut. Google says standard search eligibility and helpful content remain the basis for its AI search features; no extra special schema is required.
 - Treat Bing/Copilot eligibility and citations as dependent on crawlability, indexing, content quality and policy compliance. GEO improvements do not guarantee grounding or citation.
 
